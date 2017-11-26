@@ -9,8 +9,8 @@ import Home from './Home';
 import NewList from './NewList';
 import Lists from './Lists';
 import GroupPage from './GroupPage';
-
 import User from './User';
+import Navbar from './Navbar';
 
 import {API} from '../util/api';
 
@@ -20,6 +20,7 @@ export default class Main extends React.Component {
         return (
             <Router>
                 <div className="container">
+                    <Navbar />
     				<Switch>
     				  <Route exact path="/" component={Home} />
     				  <Route path="/newList" component={NewList} />

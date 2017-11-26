@@ -7,7 +7,7 @@ export default class GroupPageList extends React.Component {
     render() {
         let that = this;
         return (
-            <div>
+            <div className="collapse navbar-collapse" id="myNavbar">
                 { this.props.list.members.map(function(user, index){
                    return <GroupPageListItem key={index} user={user} setActiveSelection={that.props.setActiveSelection}/>
                 })}

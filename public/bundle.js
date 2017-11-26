@@ -12137,14 +12137,14 @@ var Button = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'buttonSpacing' },
                 _react2.default.createElement(
                     _reactRouterDom.Link,
                     { to: this.props.href,
                         className: this.props.tabClass },
                     _react2.default.createElement(
                         'button',
-                        { className: 'btn btn-primary btn-lg', onClick: this.props.buttonClicked, type: 'button' },
+                        { className: 'btn btn-danger btn-lg', onClick: this.props.buttonClicked, type: 'button' },
                         this.props.text
                     )
                 )
@@ -20817,6 +20817,10 @@ var _User = __webpack_require__(278);
 
 var _User2 = _interopRequireDefault(_User);
 
+var _Navbar = __webpack_require__(578);
+
+var _Navbar2 = _interopRequireDefault(_Navbar);
+
 var _api = __webpack_require__(42);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -20845,6 +20849,7 @@ var Main = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'container' },
+                    _react2.default.createElement(_Navbar2.default, null),
                     _react2.default.createElement(
                         _reactRouterDom.Switch,
                         null,
@@ -27422,22 +27427,25 @@ var AddToList = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				"div",
-				null,
+				{ className: "text-center amatic nameListContainer" },
 				_react2.default.createElement(
-					"h3",
+					"h1",
 					null,
 					"Add Person"
 				),
-				_react2.default.createElement("input", { type: "text", name: "name", value: this.state.name, onChange: this.handleInputChange, placeholder: "Name" }),
-				_react2.default.createElement("input", { type: "text", name: "email", value: this.state.email, onChange: this.handleInputChange, placeholder: "Email" }),
+				_react2.default.createElement("input", { className: "full-width buttonSpacing", type: "text", name: "name", value: this.state.name, onChange: this.handleInputChange, placeholder: "Name" }),
+				_react2.default.createElement("br", null),
+				_react2.default.createElement("input", { className: "full-width buttonSpacing", type: "text", name: "email", value: this.state.email, onChange: this.handleInputChange, placeholder: "Email" }),
+				_react2.default.createElement("br", null),
 				_react2.default.createElement(
 					"button",
-					{ className: "btn btn-lg btn-primary", onClick: this.saveAndAdd },
+					{ className: "full-width btn btn-lg btn-lightdanger buttonSpacing", onClick: this.saveAndAdd },
 					"Save and Add Another"
 				),
+				_react2.default.createElement("br", null),
 				_react2.default.createElement(
 					"button",
-					{ className: "btn btn-lg btn-primary", onClick: this.props.done },
+					{ className: "full-width btn btn-lg btn-danger buttonSpacing", onClick: this.props.done },
 					"Done!"
 				)
 			);
@@ -27687,7 +27695,7 @@ var GroupPageList = function (_React$Component) {
             var that = this;
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'collapse navbar-collapse', id: 'myNavbar' },
                 this.props.list.members.map(function (user, index) {
                     return _react2.default.createElement(_GroupPageListItem2.default, { key: index, user: user, setActiveSelection: that.props.setActiveSelection });
                 })
@@ -28024,16 +28032,17 @@ var NamingList = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'text-center nameListContainer amatic' },
                 _react2.default.createElement(
-                    'h3',
+                    'h1',
                     null,
                     'Name of List'
                 ),
-                _react2.default.createElement('input', { type: 'text', value: this.state.name, onChange: this.handleInputChange }),
+                _react2.default.createElement('input', { placeholder: 'Name', className: 'full-width', type: 'text', value: this.state.name, onChange: this.handleInputChange }),
+                _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'button',
-                    { className: 'btn btn-lg btn-primary', onClick: this.nameList },
+                    { className: 'btn btn-lg btn-danger buttonSpacing', onClick: this.nameList },
                     'Next Step'
                 )
             );
@@ -58856,6 +58865,75 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 578 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Navbar = function (_React$Component) {
+  _inherits(Navbar, _React$Component);
+
+  function Navbar() {
+    _classCallCheck(this, Navbar);
+
+    return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).apply(this, arguments));
+  }
+
+  _createClass(Navbar, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "nav",
+        { className: "navbar navbar-default" },
+        _react2.default.createElement(
+          "div",
+          { className: "container-fluid" },
+          _react2.default.createElement(
+            "div",
+            { className: "navbar-header" },
+            _react2.default.createElement(
+              "button",
+              { type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "#myNavbar" },
+              _react2.default.createElement("span", { className: "icon-bar" }),
+              _react2.default.createElement("span", { className: "icon-bar" }),
+              _react2.default.createElement("span", { className: "icon-bar" })
+            ),
+            _react2.default.createElement(
+              "a",
+              { className: "navbar-brand", href: "/" },
+              "Secret Santa"
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Navbar;
+}(_react2.default.Component);
+
+exports.default = Navbar;
 
 /***/ })
 /******/ ]);

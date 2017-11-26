@@ -29,12 +29,15 @@ export default class AddToList extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>Add Person</h3>
-                <input type="text" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="Name"/>
-                <input type="text" name="email" value={this.state.email} onChange={this.handleInputChange} placeholder="Email"/>
-                <button className="btn btn-lg btn-primary" onClick={this.saveAndAdd}>Save and Add Another</button>
-                <button className="btn btn-lg btn-primary" onClick={this.props.done}>Done!</button>
+            <div className="text-center amatic nameListContainer">
+                <h1>Add Person</h1>
+                <input className="full-width buttonSpacing" type="text" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="Name"/>
+                <br />
+                <input className="full-width buttonSpacing" type="text" name="email" value={this.state.email} onChange={this.handleInputChange} placeholder="Email"/>
+                <br />
+                <button className="full-width btn btn-lg btn-lightdanger buttonSpacing" onClick={this.saveAndAdd}>Save and Add Another</button>
+                <br />
+                <button className="full-width btn btn-lg btn-danger buttonSpacing" onClick={this.props.done}>Done!</button>
             </div>
         );
     }
