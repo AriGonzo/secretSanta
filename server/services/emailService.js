@@ -4,6 +4,8 @@ var mailer = require("nodemailer");
 
 module.exports = {
     sendEmail: function(){
+        console.log("process.env.EMAIL", process.env.EMAIL)
+        console.log("process.env.PWD", process.env.PWD)
     // Use Smtp Protocol to send Email
         var smtpTransport = mailer.createTransport({
             service: "Gmail",
