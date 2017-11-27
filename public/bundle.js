@@ -58948,12 +58948,16 @@ var Navbar = function (_React$Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function (props) {
       _this.state = {};
+    }, _this.componentDidMount = function () {
+      _this.setHamburgerVisibility();
     }, _this.componentDidUpdate = function (prev) {
       if (window.location.pathname.indexOf('show/list') !== prev.showHamburger) {
-        _this.setState({
-          showHamburger: window.location.pathname.indexOf('show/list')
-        });
+        _this.setHamburgerVisibility();
       }
+    }, _this.setHamburgerVisibility = function () {
+      _this.setState({
+        showHamburger: window.location.pathname.indexOf('show/list')
+      });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 

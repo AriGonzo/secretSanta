@@ -6,12 +6,20 @@ export default class Navbar extends React.Component {
       this.state = {}
     }
 
+    componentDidMount = () => {
+      this.setHamburgerVisibility();
+    }
+
     componentDidUpdate = (prev) =>{
       if (window.location.pathname.indexOf('show/list') !== prev.showHamburger) {
-        this.setState({
-          showHamburger: window.location.pathname.indexOf('show/list')
-        });
+        this.setHamburgerVisibility();
       }
+    }
+
+    setHamburgerVisibility = () => {
+      this.setState({
+        showHamburger: window.location.pathname.indexOf('show/list')
+      });
     }
 
     render() {
