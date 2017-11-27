@@ -38,6 +38,4 @@ require('./routes/htmlRoutes.js')(app);
 
 app.listen(PORT, function(){
 	console.log('Listening on', PORT);
-	console.log(emailService)
-	emailService.sendEmail();
 });

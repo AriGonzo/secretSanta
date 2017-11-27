@@ -24,7 +24,8 @@ export default class GroupPage extends React.Component {
 		API.getData('list', this.props.match.params.listId)
 			.then(function(response){
 				that.setState({
-					list: response.data
+					list: response.data,
+					activeSelection: response.data.members[0]
 				});
 				that.createMasterPool()
 			});
@@ -45,14 +46,14 @@ export default class GroupPage extends React.Component {
             <div>
                 {this.state.list ? (
                 	<div className="row">
-                		<div className="col-md-4">
+                		<div className="col-md-4 col-sm-4 col-xs-12">
                 			<GroupPageList 
                 				list={this.state.list} 
                 				setActiveSelection={this.setActiveSelection}
                 				activeSelection={this.state.activeSelection}
             				/>
                 		</div>
-                		<div className="col-md-8">
+                		<div className="col-md-8 col-sm-8 col-xs-12">
                 			<GroupSelectionDetail 
 	                			activeSelection={this.state.activeSelection}
 	                			list={this.state.list} 

@@ -38,6 +38,7 @@ input {
 
 button {
 	font-family: SakerSansBold;
+	letter-spacing: 2px;
 }
 /* Navbar */
 
@@ -45,6 +46,7 @@ button {
 	font-family: SakerSansBold;
 	border-radius: 0;
 	height: 60px;
+	letter-spacing: 2px;
 }
 
 .navbar-default .navbar-brand {
@@ -94,6 +96,7 @@ button {
 .nameListContainer {
 	font-family: SakerSansBold;
 	color: #f8f8f8;
+	letter-spacing: 2px;
 }
 
 
@@ -110,8 +113,11 @@ button {
 	border-radius: 12px;
 }
 
-.groupListItem.selected {
+.groupListItem.selected, .groupListItem:hover {
 	background-color: #eee;
+}
+
+.groupListItem.selected {
 	border-bottom: 1px solid darkgrey;
 	border-top: 1px solid darkgrey;
 }
@@ -141,6 +147,14 @@ button {
 }
 
 /* Media Queries */
+
+@media (max-width: 767px) {
+	#myNavbar {
+		position: absolute;
+		left: 0; right: 0;
+		z-index: 9999;
+	}	
+}
 
 @media (min-width: 768px) {
 	.groupPageSpacing {

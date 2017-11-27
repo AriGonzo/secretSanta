@@ -12218,7 +12218,8 @@ var GroupPage = function (_React$Component) {
 			var that = _this;
 			_api.API.getData('list', _this.props.match.params.listId).then(function (response) {
 				that.setState({
-					list: response.data
+					list: response.data,
+					activeSelection: response.data.members[0]
 				});
 				that.createMasterPool();
 			});
@@ -12244,7 +12245,7 @@ var GroupPage = function (_React$Component) {
 					{ className: 'row' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'col-md-4' },
+						{ className: 'col-md-4 col-sm-4 col-xs-12' },
 						_react2.default.createElement(_GroupPageList2.default, {
 							list: this.state.list,
 							setActiveSelection: this.setActiveSelection,
@@ -12253,7 +12254,7 @@ var GroupPage = function (_React$Component) {
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'col-md-8' },
+						{ className: 'col-md-8 col-sm-8 col-xs-12' },
 						_react2.default.createElement(_GroupSelectionDetail2.default, {
 							activeSelection: this.state.activeSelection,
 							list: this.state.list,
