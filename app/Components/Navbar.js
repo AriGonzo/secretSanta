@@ -2,15 +2,17 @@ import React from 'react';
 
 export default class Navbar extends React.Component {
 
-    componentWillMount = () =>{
+    componentWillMount = (props) => {
+      this.state = {}
+    }
+
+    componentDidMount = () =>{
       this.setState({
         showHamburger: window.location.pathname.indexOf('show/list')
       });
-      console.log(this.state)
     }
 
     render() {
-      console.log(this.state)
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
               <div className="container">

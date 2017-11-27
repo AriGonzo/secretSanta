@@ -58946,18 +58946,18 @@ var Navbar = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function (props) {
+      _this.state = {};
+    }, _this.componentDidMount = function () {
       _this.setState({
         showHamburger: window.location.pathname.indexOf('show/list')
       });
-      console.log(_this.state);
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Navbar, [{
     key: 'render',
     value: function render() {
-      console.log(this.state);
       return _react2.default.createElement(
         'nav',
         { className: 'navbar navbar-default navbar-fixed-top' },
