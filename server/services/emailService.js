@@ -1,5 +1,5 @@
 var mailer = require("nodemailer");
-var emailCreds = require('../creds/email')
+// var emailCreds = require('../creds/email');
 
 
 module.exports = {
