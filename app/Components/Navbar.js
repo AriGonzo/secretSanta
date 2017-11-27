@@ -4,9 +4,6 @@ export default class Navbar extends React.Component {
 
     componentWillMount = (props) => {
       this.state = {}
-    }
-
-    componentDidMount = () => {
       this.setHamburgerVisibility();
     }
 
