@@ -1,6 +1,10 @@
 {
   "name": "secretsanta",
   "version": "0.1.0",
+  "main": "server/server.js",
+  "engines": {
+    "node": "6.11.4"
+  },
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",

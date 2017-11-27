@@ -8,8 +8,8 @@ module.exports = {
         var smtpTransport = mailer.createTransport({
             service: "Gmail",
             auth: {
-                user: emailCreds.user,
-                pass: emailCreds.pass,
+                user: process.env.EMAIL || emailCreds.user,
+                pass: process.env.PWD || emailCreds.pass,
             }
         });
 
