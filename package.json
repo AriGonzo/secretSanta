@@ -5,6 +5,9 @@
   "engines": {
     "node": "6.11.4"
   },
+  "scripts": {
+    "start": "node server/server.js"
+  },
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
