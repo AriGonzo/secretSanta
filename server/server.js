@@ -2,6 +2,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var emailService = require('./services/emailService.js');
 
 // Create Instance of Express
 var app = express();
@@ -37,4 +38,6 @@ require('./routes/htmlRoutes.js')(app);
 
 app.listen(PORT, function(){
 	console.log('Listening on', PORT);
+	console.log(emailService)
+	emailService.sendEmail();
 });
