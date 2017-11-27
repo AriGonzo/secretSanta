@@ -27931,6 +27931,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(144);
+
 var _api = __webpack_require__(42);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -27986,8 +27988,8 @@ var Lists = function (_React$Component) {
                             'div',
                             null,
                             _react2.default.createElement(
-                                'a',
-                                { key: i, href: '/show/list/' + list._id },
+                                _reactRouterDom.Link,
+                                { key: i, to: '/show/list/' + list._id },
                                 _react2.default.createElement(
                                     'h2',
                                     null,

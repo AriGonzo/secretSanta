@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+    Route,
+    Link
+} from 'react-router-dom';
 
 import {API} from '../util/api';
 
@@ -24,9 +28,9 @@ export default class Lists extends React.Component {
                         return (
                                 <div className="col-md-4 col-sm-12 col-xs-12 groupListItem amatic">
                                     <div>
-                                        <a key={i} href={`/show/list/${list._id}`}>
+                                        <Link key={i} to={`/show/list/${list._id}`}>
                                             <h2> {list.name} </h2>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             )

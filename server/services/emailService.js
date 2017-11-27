@@ -1,5 +1,8 @@
 var mailer = require("nodemailer");
-// var emailCreds = require('../creds/email');
+
+if (!process.env.NODE_ENV) {
+    var emailCreds = require('../creds/email');
+}
 
 
 module.exports = {
