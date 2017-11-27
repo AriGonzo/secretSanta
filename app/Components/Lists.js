@@ -16,16 +16,19 @@ export default class Lists extends React.Component {
 	}
 
     render() {
-        console.log(this.state)
         return (
-            <div>
-                <h1>Lists</h1>
+            <div className="text-center nameListContainer row">
+                <h1 className="col-md-12 col-sm-12 col-xs-12">Lists</h1>
                 {
                     this.state.lists.map(function(list, i){
                         return (
-                                <a key={i} href={`/show/list/${list._id}`}>
-                                    <h3> {list.name} </h3>
-                                </a>
+                                <div className="col-md-4 col-sm-12 col-xs-12 groupListItem amatic">
+                                    <div>
+                                        <a key={i} href={`/show/list/${list._id}`}>
+                                            <h2> {list.name} </h2>
+                                        </a>
+                                    </div>
+                                </div>
                             )
                     })
                 }
@@ -33,3 +36,4 @@ export default class Lists extends React.Component {
         );
     }
 }
+

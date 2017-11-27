@@ -7,18 +7,20 @@
 /* Global */
 
 body {
-	background-image: url('https://cdn.pixabay.com/photo/2016/12/13/03/42/candy-cane-stripe-1903238_960_720.png');
+	background-color: #B30008;
 }
 
-.container {
+#app > .container {
 	background-color: #0F8A5F;
-	min-height: 100%;
+	min-height: 89%;
 	padding: 0;
 	overflow: hidden;
+	margin-top: 65px;
 }
 
 input {
-	font-size: 26px
+	font-size: 26px;
+	color: black;
 }
 
 .full-width {
@@ -26,7 +28,7 @@ input {
 }
 
 .amatic {
-	font-family: 'Amatic SC', cursive;
+	font-family: 'Amatic SC', cursive !important;
 }
 
 .btn-lightdanger {
@@ -42,11 +44,13 @@ button {
 .navbar {
 	font-family: SakerSansBold;
 	border-radius: 0;
+	height: 60px;
 }
 
 .navbar-default .navbar-brand {
 	font-size: 30px;
 	color: #CC231E;
+	margin-top: 8px;
 }
 
 
@@ -73,12 +77,77 @@ button {
     font-size: 50px;
 }
 
+.braesSanta {
+	margin-top: 30px;
+}
+
+.homePageButtonWrapper {
+	padding-top: 40px;
+}
+
 /* List Naming */
 
 .nameListContainer button {
 	font-size: 28px;
 }
 
-.nameListContainer h1 {
+.nameListContainer {
+	font-family: SakerSansBold;
 	color: #f8f8f8;
+}
+
+
+/* Group List */
+
+.groupListItem {
+	background-color: #f8f8f8;
+	color: green;
+	cursor: pointer;
+	border-bottom: 1px solid lightgrey;
+}
+
+.groupListItem div {
+	border-radius: 12px;
+}
+
+.groupListItem.selected {
+	background-color: #eee;
+	border-bottom: 1px solid darkgrey;
+	border-top: 1px solid darkgrey;
+}
+
+.groupListItem.selected h1 {
+	font-weight: bolder;
+}
+
+#myNavbar {
+	background-color: #f8f8f8;
+	padding: 0;
+	text-align: center
+}
+
+#myNavbar h1 {
+	margin: 0;
+	padding: 15px;
+}
+
+.activeSelectionWrapper h2 {
+	font-size: 70px;
+	margin-bottom: 30px;
+}
+
+.userDrawerIcon {
+	color: #CC231E;
+}
+
+/* Media Queries */
+
+@media (min-width: 768px) {
+	.groupPageSpacing {
+		margin-top: 30px;
+	}
+
+	.navbar-default .navbar-brand {
+		font-size: 40px;
+	}
 }

@@ -1,0 +1,1 @@
+<img src="./public/assets/images/mobile_home.jpg" />

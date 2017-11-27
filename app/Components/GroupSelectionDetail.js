@@ -28,16 +28,35 @@ export default class GroupSelectionDetail extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="nameListContainer text-center groupPageSpacing">
                 {
                     this.props.activeSelection ? (
-                        <div>
-                            <h3> {this.props.activeSelection.name} details </h3>
+                        <div className="activeSelectionWrapper">
+                            <h1>Details for:</h1>
+                            <h2 className="amatic"> {this.props.activeSelection.name}</h2>
+                            {
+                                this.props.activeSelection.selected ? (
+                                        <Button 
+                                            bsStyle="danger"
+                                            bsSize="large"
+                                            className="full-width"
+                                            onClick={this.openSelectionModal}
+                                        >Remind Me!</Button>
+                                    ) : (
+                                        <Button 
+                                            bsStyle="danger"
+                                            bsSize="large"
+                                            className="full-width"
+                                            onClick={this.openSelectionModal}
+                                        >Draw!</Button>
+                                    )
+                            }
                             <Button 
                                 bsStyle="primary"
                                 bsSize="large"
+                                className="full-width buttonSpacing"
                                 onClick={this.openSelectionModal}
-                            >Draw!</Button>
+                            >View/Edit Wish List</Button>
                             <SelectionModal 
                                 activeSelection={this.props.activeSelection}
                                 showModal={this.state.showSelectionModal}
@@ -48,7 +67,7 @@ export default class GroupSelectionDetail extends React.Component {
                             />
                         </div>
                         ) : (
-                        <h3>No User Selected</h3>
+                        <h1>No User Selected</h1>
                         )
                 }
             </div>

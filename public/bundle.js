@@ -7873,9 +7873,9 @@ var GroupPageListItem = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'nameListContainer amatic groupListItem ' + (this.props.activeSelection && this.props.activeSelection._id == this.props.user._id ? 'selected' : '') },
                 _react2.default.createElement(
-                    'h3',
+                    'h1',
                     { onClick: function onClick() {
                             _this2.props.setActiveSelection(_this2.props.user);
                         } },
@@ -12228,6 +12228,7 @@ var GroupPage = function (_React$Component) {
 			});
 			_this.setState({ masterPool: masterPool });
 		}, _this.setActiveSelection = function (activeSelection) {
+			$(".navbar-collapse").collapse('hide');
 			_this.setState({ activeSelection: activeSelection });
 		}, _temp), _possibleConstructorReturn(_this, _ret);
 	}
@@ -12246,7 +12247,8 @@ var GroupPage = function (_React$Component) {
 						{ className: 'col-md-4' },
 						_react2.default.createElement(_GroupPageList2.default, {
 							list: this.state.list,
-							setActiveSelection: this.setActiveSelection
+							setActiveSelection: this.setActiveSelection,
+							activeSelection: this.state.activeSelection
 						})
 					),
 					_react2.default.createElement(
@@ -27695,9 +27697,9 @@ var GroupPageList = function (_React$Component) {
             var that = this;
             return _react2.default.createElement(
                 'div',
-                { className: 'collapse navbar-collapse', id: 'myNavbar' },
+                { className: 'collapse navbar-collapse groupPageSpacing', id: 'myNavbar' },
                 this.props.list.members.map(function (user, index) {
-                    return _react2.default.createElement(_GroupPageListItem2.default, { key: index, user: user, setActiveSelection: that.props.setActiveSelection });
+                    return _react2.default.createElement(_GroupPageListItem2.default, { activeSelection: that.props.activeSelection, key: index, user: user, setActiveSelection: that.props.setActiveSelection });
                 })
             );
         }
@@ -27777,25 +27779,49 @@ var GroupSelectionDetail = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'nameListContainer text-center groupPageSpacing' },
                 this.props.activeSelection ? _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'activeSelectionWrapper' },
                     _react2.default.createElement(
-                        'h3',
+                        'h1',
                         null,
+                        'Details for:'
+                    ),
+                    _react2.default.createElement(
+                        'h2',
+                        { className: 'amatic' },
                         ' ',
-                        this.props.activeSelection.name,
-                        ' details '
+                        this.props.activeSelection.name
+                    ),
+                    this.props.activeSelection.selected ? _react2.default.createElement(
+                        _reactBootstrap.Button,
+                        {
+                            bsStyle: 'danger',
+                            bsSize: 'large',
+                            className: 'full-width',
+                            onClick: this.openSelectionModal
+                        },
+                        'Remind Me!'
+                    ) : _react2.default.createElement(
+                        _reactBootstrap.Button,
+                        {
+                            bsStyle: 'danger',
+                            bsSize: 'large',
+                            className: 'full-width',
+                            onClick: this.openSelectionModal
+                        },
+                        'Draw!'
                     ),
                     _react2.default.createElement(
                         _reactBootstrap.Button,
                         {
                             bsStyle: 'primary',
                             bsSize: 'large',
+                            className: 'full-width buttonSpacing',
                             onClick: this.openSelectionModal
                         },
-                        'Draw!'
+                        'View/Edit Wish List'
                     ),
                     _react2.default.createElement(_SelectionModal2.default, {
                         activeSelection: this.props.activeSelection,
@@ -27806,7 +27832,7 @@ var GroupSelectionDetail = function (_React$Component) {
                         refreshMasterPool: this.props.refreshMasterPool
                     })
                 ) : _react2.default.createElement(
-                    'h3',
+                    'h1',
                     null,
                     'No User Selected'
                 )
@@ -27862,7 +27888,7 @@ var Home = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'row' },
+                { className: 'row homePageButtonWrapper' },
                 _react2.default.createElement(
                     'div',
                     { className: 'col-md-6 col-sm-12 col-xs-12 text-center' },
@@ -27872,6 +27898,11 @@ var Home = function (_React$Component) {
                     'div',
                     { className: 'col-md-6 col-sm-12 col-xs-12 text-center' },
                     _react2.default.createElement(_Button2.default, { text: 'Check it twice', href: '/lists' })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-12 col-sm-12 col-xs-12 text-center braesSanta' },
+                    _react2.default.createElement('img', { src: 'http://www.gifs.cc/christmas/santa-pulled-by-reindeer.gif' })
                 )
             );
         }
@@ -27938,25 +27969,32 @@ var Lists = function (_React$Component) {
     _createClass(Lists, [{
         key: 'render',
         value: function render() {
-            console.log(this.state);
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'text-center nameListContainer row' },
                 _react2.default.createElement(
                     'h1',
-                    null,
+                    { className: 'col-md-12 col-sm-12 col-xs-12' },
                     'Lists'
                 ),
                 this.state.lists.map(function (list, i) {
                     return _react2.default.createElement(
-                        'a',
-                        { key: i, href: '/show/list/' + list._id },
+                        'div',
+                        { className: 'col-md-4 col-sm-12 col-xs-12 groupListItem amatic' },
                         _react2.default.createElement(
-                            'h3',
+                            'div',
                             null,
-                            ' ',
-                            list.name,
-                            ' '
+                            _react2.default.createElement(
+                                'a',
+                                { key: i, href: '/show/list/' + list._id },
+                                _react2.default.createElement(
+                                    'h2',
+                                    null,
+                                    ' ',
+                                    list.name,
+                                    ' '
+                                )
+                            )
                         )
                     );
                 })
@@ -58895,34 +58933,50 @@ var Navbar = function (_React$Component) {
   _inherits(Navbar, _React$Component);
 
   function Navbar() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Navbar);
 
-    return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
+      _this.setState({
+        showHamburger: window.location.pathname.indexOf('show/list')
+      });
+      console.log(_this.state);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Navbar, [{
-    key: "render",
+    key: 'render',
     value: function render() {
+      console.log(this.state);
       return _react2.default.createElement(
-        "nav",
-        { className: "navbar navbar-default" },
+        'nav',
+        { className: 'navbar navbar-default navbar-fixed-top' },
         _react2.default.createElement(
-          "div",
-          { className: "container-fluid" },
+          'div',
+          { className: 'container' },
           _react2.default.createElement(
-            "div",
-            { className: "navbar-header" },
+            'div',
+            { className: 'navbar-header' },
             _react2.default.createElement(
-              "button",
-              { type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "#myNavbar" },
-              _react2.default.createElement("span", { className: "icon-bar" }),
-              _react2.default.createElement("span", { className: "icon-bar" }),
-              _react2.default.createElement("span", { className: "icon-bar" })
+              'button',
+              { type: 'button', className: 'navbar-toggle ' + (this.state.showHamburger != -1 ? '' : 'hide'), 'data-toggle': 'collapse', 'data-target': '#myNavbar' },
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons userDrawerIcon' },
+                'people'
+              )
             ),
             _react2.default.createElement(
-              "a",
-              { className: "navbar-brand", href: "/" },
-              "Secret Santa"
+              'a',
+              { className: 'navbar-brand', href: '/' },
+              'Secret Santa'
             )
           )
         )

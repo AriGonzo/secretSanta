@@ -36,6 +36,7 @@ export default class GroupPage extends React.Component {
 	}
 
 	setActiveSelection = (activeSelection) => {
+		$(".navbar-collapse").collapse('hide')
 		this.setState({activeSelection})
 	}
 
@@ -48,11 +49,12 @@ export default class GroupPage extends React.Component {
                 			<GroupPageList 
                 				list={this.state.list} 
                 				setActiveSelection={this.setActiveSelection}
+                				activeSelection={this.state.activeSelection}
             				/>
                 		</div>
                 		<div className="col-md-8">
                 			<GroupSelectionDetail 
-	                			activeSelection={this.state.activeSelection} 
+	                			activeSelection={this.state.activeSelection}
 	                			list={this.state.list} 
 	                			masterPool={this.state.masterPool}
 	                			refreshMasterPool={this.refreshData}
