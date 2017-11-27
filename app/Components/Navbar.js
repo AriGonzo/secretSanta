@@ -17,7 +17,7 @@ export default class Navbar extends React.Component {
             <nav className="navbar navbar-default navbar-fixed-top">
               <div className="container">
                 <div className="navbar-header">
-                  <button type="button" className={`navbar-toggle ${this.state.showHamburger != -1 ? `` : `hide`}`} data-toggle="collapse" data-target="#myNavbar">
+                  <button type="button" className={`navbar-toggle ${this.state.showHamburger == -1 ? `hide` : ``}`} data-toggle="collapse" data-target="#myNavbar">
                     <i className="material-icons userDrawerIcon">people</i>
                   </button>
                   <a className="navbar-brand" href="/">Secret Santa</a>

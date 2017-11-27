@@ -58969,7 +58969,7 @@ var Navbar = function (_React$Component) {
             { className: 'navbar-header' },
             _react2.default.createElement(
               'button',
-              { type: 'button', className: 'navbar-toggle ' + (this.state.showHamburger != -1 ? '' : 'hide'), 'data-toggle': 'collapse', 'data-target': '#myNavbar' },
+              { type: 'button', className: 'navbar-toggle ' + (this.state.showHamburger == -1 ? 'hide' : ''), 'data-toggle': 'collapse', 'data-target': '#myNavbar' },
               _react2.default.createElement(
                 'i',
                 { className: 'material-icons userDrawerIcon' },
