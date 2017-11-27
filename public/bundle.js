@@ -58950,7 +58950,7 @@ var Navbar = function (_React$Component) {
       _this.state = {};
       _this.setHamburgerVisibility();
     }, _this.componentDidUpdate = function (prev) {
-      if (window.location.pathname.indexOf('show/list') !== prev.showHamburger) {
+      if (window.location.pathname.indexOf('show/list') !== -1 && _this.state.showHamburger == -1) {
         _this.setHamburgerVisibility();
       }
     }, _this.setHamburgerVisibility = function () {

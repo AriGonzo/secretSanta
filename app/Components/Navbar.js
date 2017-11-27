@@ -8,7 +8,7 @@ export default class Navbar extends React.Component {
     }
 
     componentDidUpdate = (prev) =>{
-      if (window.location.pathname.indexOf('show/list') !== prev.showHamburger) {
+      if (window.location.pathname.indexOf('show/list') !== -1 && this.state.showHamburger == -1) {
         this.setHamburgerVisibility();
       }
     }
