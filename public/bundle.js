@@ -27642,10 +27642,10 @@ var Exceptions = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'text-center' },
                     _react2.default.createElement(
                         'button',
-                        { className: 'btn btn-lg btn-primary', onClick: this.clickHander },
+                        { className: 'btn btn-lg btn-primary buttonSpacing full-width', onClick: this.clickHander },
                         'Done!'
                     )
                 )

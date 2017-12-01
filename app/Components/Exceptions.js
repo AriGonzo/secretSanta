@@ -27,8 +27,8 @@ export default class Exceptions extends React.Component {
             	<div className="row">
                 	{ this.renderListItems() }
             	</div>
-            	<div>
-            		<button className="btn btn-lg btn-primary" onClick={this.clickHander}>Done!</button>
+            	<div className="text-center">
+            		<button className="btn btn-lg btn-primary buttonSpacing full-width" onClick={this.clickHander}>Done!</button>
             	</div>
             </div>
         );
