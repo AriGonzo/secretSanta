@@ -32,7 +32,7 @@ export default class NewList extends React.Component {
 		});
 	}
 
-	saveAndAdd = (user) => {
+	saveAndAdd = (user, lastAdd) => {
 		let newArray = this.state.users.slice();
 		newArray.push(user)
 		this.setState({
@@ -42,6 +42,7 @@ export default class NewList extends React.Component {
 
 	done = () => {
 		let that = this;
+		console.log(this.state.users)
 		API.newList({
 			name: this.state.nameOfList,
 			users: this.state.users

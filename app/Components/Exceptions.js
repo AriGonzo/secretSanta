@@ -36,6 +36,7 @@ export default class Exceptions extends React.Component {
     render() {
         return (
             <div>
+                <h1 className="text-center whiteText">Exceptions</h1>
             	<div className="row">
                 	{ this.renderListItems() }
             	</div>

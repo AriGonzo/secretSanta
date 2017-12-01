@@ -8,6 +8,7 @@
 
 body {
 	background-color: #B30008;
+	font-family: SakerSansBold;
 }
 
 li {
@@ -32,6 +33,14 @@ input {
 	width: 90%;
 }
 
+.largerText {
+	font-size: 30px;
+}
+
+.whiteText {
+	color: #f8f8f8;
+}
+
 .amatic {
 	font-family: 'Gochi Hand', cursive !important;
 }
@@ -42,13 +51,11 @@ input {
 }
 
 button {
-	font-family: SakerSansBold;
 	letter-spacing: 2px;
 }
 /* Navbar */
 
 .navbar {
-	font-family: SakerSansBold;
 	border-radius: 0;
 	height: 60px;
 	letter-spacing: 2px;
@@ -100,7 +107,6 @@ button {
 }
 
 .nameListContainer {
-	font-family: SakerSansBold;
 	color: #f8f8f8;
 	letter-spacing: 2px;
 }

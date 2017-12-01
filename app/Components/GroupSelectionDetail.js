@@ -34,27 +34,16 @@ export default class GroupSelectionDetail extends React.Component {
                         <div className="activeSelectionWrapper">
                             <h1>Details for:</h1>
                             <h2 className="amatic"> {this.props.activeSelection.name}</h2>
-                            {
-                                this.props.activeSelection.selected ? (
-                                        <Button 
-                                            bsStyle="danger"
-                                            bsSize="large"
-                                            className="full-width"
-                                            onClick={this.openSelectionModal}
-                                        >Remind Me!</Button>
-                                    ) : (
-                                        <Button 
-                                            bsStyle="danger"
-                                            bsSize="large"
-                                            className="full-width"
-                                            onClick={this.openSelectionModal}
-                                        >Draw!</Button>
-                                    )
-                            }
+                            <Button 
+                                bsStyle="danger"
+                                bsSize="large"
+                                className="full-width"
+                                onClick={this.openSelectionModal}
+                            >Draw!</Button>
                             <Button 
                                 bsStyle="primary"
                                 bsSize="large"
-                                className="full-width buttonSpacing"
+                                className="full-width buttonSpacing hide"
                                 onClick={this.openSelectionModal}
                             >View/Edit Wish List</Button>
                             <SelectionModal 
@@ -62,8 +51,6 @@ export default class GroupSelectionDetail extends React.Component {
                                 showModal={this.state.showSelectionModal}
                                 closeModal={this.closeModal} 
                                 list={this.props.list}
-                                masterPool={this.props.masterPool}
-                                refreshMasterPool={this.props.refreshMasterPool}
                             />
                         </div>
                         ) : (

@@ -27,13 +27,7 @@ export default class GroupPage extends React.Component {
 					list: response.data,
 					activeSelection: response.data.members[0]
 				});
-				that.createMasterPool()
 			});
-	}
-
-	createMasterPool = () => {
-		let masterPool = this.state.list.members.filter(member => !member.amISelected);
-		this.setState({masterPool})
 	}
 
 	setActiveSelection = (activeSelection) => {
@@ -57,8 +51,6 @@ export default class GroupPage extends React.Component {
                 			<GroupSelectionDetail 
 	                			activeSelection={this.state.activeSelection}
 	                			list={this.state.list} 
-	                			masterPool={this.state.masterPool}
-	                			refreshMasterPool={this.refreshData}
                 			/>
                 		</div>
 	                </div>

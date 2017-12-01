@@ -33,7 +33,8 @@ module.exports = function(app){
 			break
 			case 'list':
 			List.findById(userId).populate({
-				path: "members"
+				path: "members",
+				populate: {path: "selected"}
 			}).populate('captain').exec(function(err, oList){
 				res.send(oList);
 			});
