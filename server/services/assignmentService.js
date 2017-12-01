@@ -1,13 +1,16 @@
 const async = require('async');
+const User = require('../models/User');
 
 module.exports = {
     trigger: function(arr){
         let selectorArray = arr;
         let selecteeArray = arr.slice(0);
+        let that = this;
+
         this.shuffle(selecteeArray);
         this.parseArrays(selectorArray, selecteeArray).then(function(completedArray){
-            console.log('completedArray is', completedArray);
             console.log('completedArray.length is', completedArray.length);
+            that.assignUsers(completedArray);
         }).catch(function(err){
             console.log('err is', err)
         });
@@ -94,5 +97,17 @@ module.exports = {
                 }
             });
         })
+    },
+    assignUsers: function(completedArray){
+        async.each(completedArray, function(pairs, callback){
+            User.findById(pairs[0]._id).exec(function(err, oUser){
+                oUser.selected = pairs[1]._id;
+                oUser.save(function(){
+                    callback();
+                });
+            });
+        }, function(){
+            console.log("User Sorted and Saved Successfully!")
+        });
     }
 }
