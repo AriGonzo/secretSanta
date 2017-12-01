@@ -27526,7 +27526,7 @@ var ExceptionListItem = function (_React$Component) {
             var mappedItems = _this.state.restOfList.map(function (member, index) {
                 return _react2.default.createElement(
                     'li',
-                    { className: 'col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ' + (that.props.thisMember.exceptions.indexOf(member._id) !== -1 ? 'selected' : ''), key: index },
+                    { className: 'col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ' + (that.props.thisMember.exceptions.indexOf(member._id) !== -1 ? 'selected' : 'unselected'), key: index },
                     _react2.default.createElement(
                         'div',
                         { className: 'otherUsers', id: member._id + '_' + that.props.thisMember._id, 'data-id': member._id, type: 'checkbox', onClick: function onClick() {
