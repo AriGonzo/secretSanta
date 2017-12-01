@@ -26,17 +26,17 @@ export default class ExceptionListItem extends React.Component {
             let newExceptionList = util.removeFromArray(exceptionList, id);
             this.props.thisMember.exceptions = newExceptionList;
         }
+        this.forceUpdate()
     }
 
     renderListItems = () => {
         let that = this;
         let mappedItems = this.state.restOfList.map(function(member, index){
             return (
-                <li key={index}>
-                    <label htmlFor={`${member._id}_${that.props.thisMember._id}`}>
-                        <input id={`${member._id}_${that.props.thisMember._id}`} data-id={member._id} type="checkbox" onChange={()=> {that.toggleException(member._id)}} />
+                <li className={`col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ${ that.props.thisMember.exceptions.indexOf(member._id) !== -1 ? 'selected' : '' }`} key={index}>
+                    <div className="otherUsers" id={`${member._id}_${that.props.thisMember._id}`} data-id={member._id} type="checkbox" onClick={()=> {that.toggleException(member._id)}}>
                         {member.name}
-                    </label>
+                    </div>
                 </li>
             )
         });
@@ -45,11 +45,13 @@ export default class ExceptionListItem extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>{this.props.thisMember.name}</h3>
-                <ul>
-                    { this.renderListItems() }
-                </ul>
+            <div className="col-md-6 col-sm-6 col-xs-12">
+                <div className="exceptionListItem text-center amatic">
+                    <h3>{this.props.thisMember.name}</h3>
+                    <ul className="row otherUserList">
+                        { this.renderListItems() }
+                    </ul>
+                </div>
             </div>
         );
     }

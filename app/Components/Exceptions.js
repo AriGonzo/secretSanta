@@ -24,7 +24,7 @@ export default class Exceptions extends React.Component {
     render() {
         return (
             <div>
-            	<div>
+            	<div className="row">
                 	{ this.renderListItems() }
             	</div>
             	<div>

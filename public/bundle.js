@@ -27520,18 +27520,18 @@ var ExceptionListItem = function (_React$Component) {
                 var newExceptionList = _utilityMethods.util.removeFromArray(exceptionList, id);
                 _this.props.thisMember.exceptions = newExceptionList;
             }
+            _this.forceUpdate();
         }, _this.renderListItems = function () {
             var that = _this;
             var mappedItems = _this.state.restOfList.map(function (member, index) {
                 return _react2.default.createElement(
                     'li',
-                    { key: index },
+                    { className: 'col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ' + (that.props.thisMember.exceptions.indexOf(member._id) !== -1 ? 'selected' : ''), key: index },
                     _react2.default.createElement(
-                        'label',
-                        { htmlFor: member._id + '_' + that.props.thisMember._id },
-                        _react2.default.createElement('input', { id: member._id + '_' + that.props.thisMember._id, 'data-id': member._id, type: 'checkbox', onChange: function onChange() {
+                        'div',
+                        { className: 'otherUsers', id: member._id + '_' + that.props.thisMember._id, 'data-id': member._id, type: 'checkbox', onClick: function onClick() {
                                 that.toggleException(member._id);
-                            } }),
+                            } },
                         member.name
                     )
                 );
@@ -27545,16 +27545,20 @@ var ExceptionListItem = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'col-md-6 col-sm-6 col-xs-12' },
                 _react2.default.createElement(
-                    'h3',
-                    null,
-                    this.props.thisMember.name
-                ),
-                _react2.default.createElement(
-                    'ul',
-                    null,
-                    this.renderListItems()
+                    'div',
+                    { className: 'exceptionListItem text-center amatic' },
+                    _react2.default.createElement(
+                        'h3',
+                        null,
+                        this.props.thisMember.name
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        { className: 'row otherUserList' },
+                        this.renderListItems()
+                    )
                 )
             );
         }
@@ -27633,7 +27637,7 @@ var Exceptions = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'row' },
                     this.renderListItems()
                 ),
                 _react2.default.createElement(

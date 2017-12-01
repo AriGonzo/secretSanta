@@ -79,10 +79,11 @@ module.exports = {
                         unsuccessfulSelector[1]._id !== unsuccessfulSelectee[0]._id &&
                         unsuccessfulSelector[1].exceptions.indexOf(unsuccessfulSelectee[0]._id) == -1) {
                         that.successfulPairs.push([unsuccessfulSelector[0], unsuccessfulSelectee[1]], [unsuccessfulSelector[1], unsuccessfulSelectee[0]]);
-                        console.log("flipped last pairs, shuffle complete")
+                        console.log("flipped last pairs, shuffle complete");
                         resolve(that.successfulPairs);
                     } else {
-                        console.log('have to figure out this solution')
+                        console.log('have to figure out this solution');
+                        ctx.trigger(selectorArray);
                     }
                 } else if (unsuccessfulSelector.length <= 3) {
                     //shuffle the selecteeArray and pass both arrays back through the parser

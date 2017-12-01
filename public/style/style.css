@@ -10,6 +10,10 @@ body {
 	background-color: #B30008;
 }
 
+li {
+	list-style-type: none;
+}
+
 #app > .container {
 	/*background-color: #0F8A5F;*/
 	background: url("https://hbagc.com/wp-content/uploads/2015/11/dark-green-christmas-background.jpg");
@@ -29,7 +33,7 @@ input {
 }
 
 .amatic {
-	font-family: 'Amatic SC', cursive !important;
+	font-family: 'Gochi Hand', cursive !important;
 }
 
 .btn-lightdanger {
@@ -105,6 +109,38 @@ button {
 	letter-spacing: 1px;
 }
 
+/* Exceptions */
+
+.exceptionListItem {
+	background-color: #edefeb;
+	width: 90%;
+	margin: auto;
+}
+
+.exceptionListItem .otherUserList {
+	margin: 0;
+	padding: 0;
+}
+
+.exceptionListItem .otherUsersWrapper {
+	background: #B30008;
+	cursor: pointer;
+}
+
+.exceptionListItem .otherUsersWrapper:hover, .exceptionListItem .otherUsersWrapper.selected {
+	background: #990007;
+}
+
+.exceptionListItem .otherUsers {
+	padding: 10px;
+	font-size: 30px;
+	color: #edefeb;
+}
+
+.exceptionListItem h3 {
+	font-size: 40px;
+	font-weight: bolder;
+}
 
 /* Group List */
 
