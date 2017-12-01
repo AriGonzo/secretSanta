@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ExceptionOtherUser from './ExceptionOtherUser';
+
 import {util} from '../util/utilityMethods';
 
 export default class ExceptionListItem extends React.Component {
@@ -33,11 +35,7 @@ export default class ExceptionListItem extends React.Component {
         let that = this;
         let mappedItems = this.state.restOfList.map(function(member, index){
             return (
-                <li className={`col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ${ that.props.thisMember.exceptions.indexOf(member._id) !== -1 ? 'selected' : 'unselected' }`} key={index}>
-                    <div className="otherUsers" id={`${member._id}_${that.props.thisMember._id}`} data-id={member._id} type="checkbox" onClick={()=> {that.toggleException(member._id)}}>
-                        {member.name}
-                    </div>
-                </li>
+                <ExceptionOtherUser key={index} thisMember={that.props.thisMember} member={member} toggleException={that.toggleException} />
             )
         });
         return mappedItems

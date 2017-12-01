@@ -27477,6 +27477,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ExceptionOtherUser = __webpack_require__(579);
+
+var _ExceptionOtherUser2 = _interopRequireDefault(_ExceptionOtherUser);
+
 var _utilityMethods = __webpack_require__(156);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -27524,17 +27528,7 @@ var ExceptionListItem = function (_React$Component) {
         }, _this.renderListItems = function () {
             var that = _this;
             var mappedItems = _this.state.restOfList.map(function (member, index) {
-                return _react2.default.createElement(
-                    'li',
-                    { className: 'col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ' + (that.props.thisMember.exceptions.indexOf(member._id) !== -1 ? 'selected' : 'unselected'), key: index },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'otherUsers', id: member._id + '_' + that.props.thisMember._id, 'data-id': member._id, type: 'checkbox', onClick: function onClick() {
-                                that.toggleException(member._id);
-                            } },
-                        member.name
-                    )
-                );
+                return _react2.default.createElement(_ExceptionOtherUser2.default, { key: index, thisMember: that.props.thisMember, member: member, toggleException: that.toggleException });
             });
             return mappedItems;
         }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -59006,6 +59000,79 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 579 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _utilityMethods = __webpack_require__(156);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ExceptionOtherUser = function (_React$Component) {
+    _inherits(ExceptionOtherUser, _React$Component);
+
+    function ExceptionOtherUser() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, ExceptionOtherUser);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ExceptionOtherUser.__proto__ || Object.getPrototypeOf(ExceptionOtherUser)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
+            _this.setState({
+                selected: false
+            });
+        }, _this.toggleException = function () {
+            _this.props.toggleException(_this.props.member._id);
+            _this.setState({
+                selected: !_this.state.selected
+            });
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(ExceptionOtherUser, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'li',
+                { className: 'col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ' + (this.state.selected ? 'selected' : 'unselected') },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'otherUsers', id: this.props.member._id + '_' + this.props.thisMember._id, 'data-id': this.props.member._id, type: 'checkbox', onClick: this.toggleException },
+                    this.props.member.name
+                )
+            );
+        }
+    }]);
+
+    return ExceptionOtherUser;
+}(_react2.default.Component);
+
+exports.default = ExceptionOtherUser;
 
 /***/ })
 /******/ ]);
