@@ -24,9 +24,9 @@ export default class NamingList extends React.Component {
 
     render() {
         return (
-            <div className="text-center nameListContainer amatic">
+            <div className="text-center nameListContainer">
                 <h1>Name of List</h1>
-                <input placeholder="Name" className="full-width" type="text" value={this.state.name} onChange={this.handleInputChange} />
+                <input placeholder="Name" className="full-width amatic" type="text" value={this.state.name} onChange={this.handleInputChange} />
                 <br />
                 <button className="btn btn-lg btn-danger buttonSpacing" onClick={this.nameList}>Next Step</button>
             </div>

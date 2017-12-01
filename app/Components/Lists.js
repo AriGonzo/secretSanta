@@ -29,7 +29,7 @@ export default class Lists extends React.Component {
                                 <div className="col-md-4 col-sm-12 col-xs-12 groupListItem amatic">
                                     <div>
                                         <Link key={i} to={`/show/list/${list._id}`}>
-                                            <h2> {list.name} </h2>
+                                            <h2 className="standardSpacing"><b> {list.name} </b></h2>
                                         </Link>
                                     </div>
                                 </div>

@@ -4,6 +4,8 @@ const async = require('async');
 const User = require('../models/User');
 const List = require('../models/List');
 
+const assignmentService = require('../services/assignmentService');
+
 module.exports = function(app){
 	app.get('/allLists', function(req, res){
 		List.find({})
@@ -85,7 +87,8 @@ module.exports = function(app){
 			});
 		}, function(){
 			List.findById(req.body.list._id).populate('members').populate('captain').exec(function(err, list){
-				res.send(list)
+				let resp = assignmentService.trigger(list.members);;
+				res.send(resp)
 			});
 		})
 	});

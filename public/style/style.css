@@ -11,7 +11,8 @@ body {
 }
 
 #app > .container {
-	background-color: #0F8A5F;
+	/*background-color: #0F8A5F;*/
+	background: url("https://hbagc.com/wp-content/uploads/2015/11/dark-green-christmas-background.jpg");
 	min-height: 89%;
 	padding: 0;
 	overflow: hidden;
@@ -47,6 +48,7 @@ button {
 	border-radius: 0;
 	height: 60px;
 	letter-spacing: 2px;
+	background-color: #edefeb;
 }
 
 .navbar-default .navbar-brand {
@@ -97,6 +99,10 @@ button {
 	font-family: SakerSansBold;
 	color: #f8f8f8;
 	letter-spacing: 2px;
+}
+
+.nameListContainer .standardSpacing {
+	letter-spacing: 1px;
 }
 
 

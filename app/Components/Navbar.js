@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+    Route,
+    Link
+} from 'react-router-dom';
 
 export default class Navbar extends React.Component {
 
@@ -27,7 +31,7 @@ export default class Navbar extends React.Component {
                   <button type="button" className={`navbar-toggle ${this.state.showHamburger == -1 ? `hide` : ``}`} data-toggle="collapse" data-target="#myNavbar">
                     <i className="material-icons userDrawerIcon">people</i>
                   </button>
-                  <a className="navbar-brand" href="/">Secret Santa</a>
+                  <Link className="navbar-brand" to="/">Secret Santa</Link>
                 </div>
               </div>
             </nav>
