@@ -6,7 +6,7 @@ if (!process.env.NODE_ENV) {
 
 
 module.exports = {
-    sendEmail: function(){
+    sendEmail: function(user){
     // Use Smtp Protocol to send Email
         var smtpTransport = mailer.createTransport({
             service: "Gmail",
@@ -18,10 +18,10 @@ module.exports = {
 
         var mail = {
             from: "Secret Santa <secretsantaappcourier@gmail.com>",
-            to: "gonzoucf@gmail.com",
-            subject: "Send Email Using Node.js",
-            text: "Node.js New world for me",
-            html: "<b>Node.js New world for me</b>"
+            to: user.email,
+            subject: "Reminder: Your Secret Santa Pick!",
+            text: `Your secret santa pick is ${user.selected.name}!`,
+            html: `<h1>Don't Forget! Your Secret Santa pick is ${user.selected.name}!</h1>`
         }
 
         smtpTransport.sendMail(mail, function(error, response){

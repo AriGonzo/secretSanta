@@ -40,7 +40,7 @@ export default class SelectionModal extends React.Component {
     render() {
         return (
             <Modal show={this.props.showModal} onExited={()=> {this.cleanupData()}}>
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title bsClass="amatic largerText">Draw - {this.props.activeSelection.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

@@ -6,12 +6,15 @@ import {
 import GroupPageListItem from './GroupPageListItem';
 import SelectionModal from './SelectionModal';
 
+import {API} from '../util/api';
+
 export default class GroupSelectionDetail extends React.Component {
 
     componentWillMount = () => {
         this.setState({
             showModal: false
         });
+        console.log(this)
     }
 
     openSelectionModal = () => {
@@ -20,10 +23,24 @@ export default class GroupSelectionDetail extends React.Component {
         });
     }
 
+    triggerEmail = () => {
+        console.log('fire');
+        API.triggerEmail(this.props.activeSelection._id)
+            .then(function(){
+                alert("email sent")
+            });
+    }
+
     closeModal = () => {
+        let that = this;
         this.setState({
             showSelectionModal: false
-        })
+        });
+        API.updateDrawn(this.props.activeSelection._id)
+            .then(function(){
+                that.props.activeSelection.drawn = true;
+                that.forceUpdate();
+            });
     }
 
     render() {
@@ -34,12 +51,21 @@ export default class GroupSelectionDetail extends React.Component {
                         <div className="activeSelectionWrapper">
                             <h1>Details for:</h1>
                             <h2 className="amatic"> {this.props.activeSelection.name}</h2>
-                            <Button 
-                                bsStyle="danger"
-                                bsSize="large"
-                                className="full-width"
-                                onClick={this.openSelectionModal}
-                            >Draw!</Button>
+                            { this.props.activeSelection.drawn ? (
+                                <Button 
+                                    bsStyle="danger"
+                                    bsSize="large"
+                                    className="full-width"
+                                    onClick={this.triggerEmail}
+                                >Remind Me!</Button>
+                                ) : (
+                                <Button 
+                                    bsStyle="danger"
+                                    bsSize="large"
+                                    className="full-width"
+                                    onClick={this.openSelectionModal}
+                                >Draw!</Button>
+                                ) }
                             <Button 
                                 bsStyle="primary"
                                 bsSize="large"

@@ -13,7 +13,7 @@ var UserSchema = new Schema({
 		ref: 'User'
 	},
 	requests: [String],
-	amISelected: {type: Boolean, default: false}
+	drawn: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('User', UserSchema);

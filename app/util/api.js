@@ -27,5 +27,11 @@ export const API = {
     },
     deleteUser: function(id){
 
+    },
+    updateDrawn: function(userId){
+        return axios.put('/updateDrawn', {userId});
+    },
+    triggerEmail: function(userId){
+        return axios.post('/triggerEmail', {userId});
     }
 };

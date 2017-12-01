@@ -5,6 +5,7 @@ const User = require('../models/User');
 const List = require('../models/List');
 
 const assignmentService = require('../services/assignmentService');
+const emailService = require('../services/emailService');
 
 module.exports = function(app){
 	app.get('/allLists', function(req, res){
@@ -113,6 +114,27 @@ module.exports = function(app){
 				});
 			});
 		});
+	});
+
+	app.put('/updateDrawn', function(req, res){
+		let userId = req.body.userId;
+
+		User.findById(userId).exec(function(err, oUser){
+			oUser.drawn = true;
+			oUser.save(function(){
+				res.send("ok!")
+			});
+		});
+	});
+
+	app.post('/triggerEmail', function(req, res){
+		let userId = req.body.userId;
+
+		User.findById(userId).populate('selected').exec(function(err, oUser){
+			emailService.sendEmail(oUser);
+			res.send("ok")
+		});
+
 	});
 
 	app.put('/user/:userId', function(){
