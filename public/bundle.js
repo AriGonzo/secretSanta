@@ -27524,6 +27524,7 @@ var ExceptionListItem = function (_React$Component) {
                 var newExceptionList = _utilityMethods.util.removeFromArray(exceptionList, id);
                 _this.props.thisMember.exceptions = newExceptionList;
             }
+            _this.props.updatedException(_this.props.list);
         }, _this.renderListItems = function () {
             var that = _this;
             var mappedItems = _this.state.restOfList.map(function (member, index) {
@@ -27607,12 +27608,20 @@ var Exceptions = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Exceptions.__proto__ || Object.getPrototypeOf(Exceptions)).call.apply(_ref, [this].concat(args))), _this), _this.renderListItems = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Exceptions.__proto__ || Object.getPrototypeOf(Exceptions)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
+            _this.setState({
+                list: _this.props.list
+            });
+        }, _this.renderListItems = function () {
             var that = _this;
-            var mappedItems = _this.props.list.members.map(function (member, index) {
-                return _react2.default.createElement(_ExceptionListItem2.default, { key: index, thisMember: member, list: that.props.list });
+            var mappedItems = _this.state.list.members.map(function (member, index) {
+                return _react2.default.createElement(_ExceptionListItem2.default, { key: index, thisMember: member, list: that.props.list, updatedException: that.updatedException });
             });
             return mappedItems;
+        }, _this.updatedException = function (updatedList) {
+            _this.setState({
+                list: updatedList
+            });
         }, _this.clickHander = function () {
             var that = _this;
             _api.API.applyExceptions(_this.props.list).then(function (response) {
@@ -59045,23 +59054,27 @@ var ExceptionOtherUser = function (_React$Component) {
             _this.setState({
                 selected: false
             });
-        }, _this.toggleException = function () {
+        }, _this.toggleException = function (id) {
             _this.setState({
                 selected: !_this.state.selected
             });
-            _this.props.toggleException(_this.props.member._id);
+            _this.forceUpdate();
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(ExceptionOtherUser, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 'li',
-                { className: 'col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ' + (this.state.selected ? 'selected' : 'unselected') },
+                { className: 'col-md-6 col-sm-6 col-xs-6 otherUsersWrapper ' + this.state.selected },
                 _react2.default.createElement(
                     'div',
-                    { className: 'otherUsers', id: this.props.member._id + '_' + this.props.thisMember._id, 'data-id': this.props.member._id, type: 'checkbox', onClick: this.toggleException },
+                    { className: 'otherUsers', id: this.props.member._id + '_' + this.props.thisMember._id, 'data-id': this.props.member._id, type: 'checkbox', onClick: function onClick() {
+                            _this2.toggleException(_this2.props.member._id);
+                        } },
                     this.props.member.name
                 )
             );

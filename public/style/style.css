@@ -122,12 +122,16 @@ button {
 	padding: 0;
 }
 
-.exceptionListItem .otherUsersWrapper, .otherUsersWrapper.unselected {
+.exceptionListItem .otherUsersWrapper {
+	cursor: pointer;
+}
+
+.otherUsersWrapper.false {
 	background: #B30008;
 	cursor: pointer;
 }
 
-.exceptionListItem .otherUsersWrapper:hover, .exceptionListItem .otherUsersWrapper.selected {
+.exceptionListItem .otherUsersWrapper:hover, .exceptionListItem .otherUsersWrapper.true {
 	background: #990007;
 }
 

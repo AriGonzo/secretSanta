@@ -28,6 +28,7 @@ export default class ExceptionListItem extends React.Component {
             let newExceptionList = util.removeFromArray(exceptionList, id);
             this.props.thisMember.exceptions = newExceptionList;
         }
+        this.props.updatedException(this.props.list)
     }
 
     renderListItems = () => {
