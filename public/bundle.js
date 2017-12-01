@@ -27524,7 +27524,6 @@ var ExceptionListItem = function (_React$Component) {
                 var newExceptionList = _utilityMethods.util.removeFromArray(exceptionList, id);
                 _this.props.thisMember.exceptions = newExceptionList;
             }
-            _this.forceUpdate();
         }, _this.renderListItems = function () {
             var that = _this;
             var mappedItems = _this.state.restOfList.map(function (member, index) {
@@ -59047,10 +59046,10 @@ var ExceptionOtherUser = function (_React$Component) {
                 selected: false
             });
         }, _this.toggleException = function () {
-            _this.props.toggleException(_this.props.member._id);
             _this.setState({
                 selected: !_this.state.selected
             });
+            _this.props.toggleException(_this.props.member._id);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 

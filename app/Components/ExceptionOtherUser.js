@@ -12,10 +12,10 @@ export default class ExceptionOtherUser extends React.Component {
 	}
 
     toggleException = () => {
-        this.props.toggleException(this.props.member._id);
         this.setState({
             selected: !this.state.selected
-        })
+        });
+        this.props.toggleException(this.props.member._id);
     }
 
     render() {
