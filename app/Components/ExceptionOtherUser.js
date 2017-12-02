@@ -15,6 +15,7 @@ export default class ExceptionOtherUser extends React.Component {
         this.setState({
             selected: !this.state.selected
         });
+        this.props.toggleException(id);
         this.forceUpdate();
     }
 

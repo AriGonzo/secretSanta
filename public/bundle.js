@@ -21981,6 +21981,7 @@ var ExceptionOtherUser = function (_React$Component) {
             _this.setState({
                 selected: !_this.state.selected
             });
+            _this.props.toggleException(id);
             _this.forceUpdate();
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
