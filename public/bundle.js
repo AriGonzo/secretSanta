@@ -22839,7 +22839,8 @@ var SelectionModal = function (_React$Component) {
             });
 
             _this.selectionSound = new Audio("/assets/sounds/tada.WAV");
-            _this.clickSound = new Audio("/assets/sounds/taka.WAV");
+            _this.clickSound = new Audio("/assets/sounds/taka.wav");
+            _this.clickSound.loop = true;
         }, _this.componentDidUpdate = function (prev) {
             if (_this.props.activeSelection._id !== prev.activeSelection._id) {
                 _this.setState({
@@ -22861,7 +22862,6 @@ var SelectionModal = function (_React$Component) {
             });
             _this.props.closeModal();
         }, _this.playSound = function () {
-            _this.clickSound.loop = true;
             _this.clickSound.play();
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }

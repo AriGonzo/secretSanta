@@ -14,7 +14,8 @@ export default class SelectionModal extends React.Component {
         });
 
         this.selectionSound = new Audio("/assets/sounds/tada.WAV");
-        this.clickSound = new Audio("/assets/sounds/taka.WAV");
+        this.clickSound = new Audio("/assets/sounds/taka.wav");
+        this.clickSound.loop = true;
     }
 
     componentDidUpdate = (prev) => {
@@ -42,9 +43,8 @@ export default class SelectionModal extends React.Component {
         });
         this.props.closeModal()
     }
-    
+
     playSound = () => {
-        this.clickSound.loop = true;
         this.clickSound.play();
     }
 
