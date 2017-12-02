@@ -14,8 +14,7 @@ export default class SelectionModal extends React.Component {
         });
 
         this.selectionSound = new Audio("/assets/sounds/tada.WAV");
-        this.clickSound = new Audio("/assets/sounds/taka.wav");
-        this.clickSound.loop = true;
+        this.clickSound = new Audio("/assets/sounds/taka.WAV");
     }
 
     componentDidUpdate = (prev) => {
@@ -28,8 +27,7 @@ export default class SelectionModal extends React.Component {
     }
 
     makeSelection = () => {
-        this.clickSound.pause();
-        this.clickSound.currentTime = 0;
+        this.props.soundManager('tada');
         this.selectionSound.play();
         let that = this;
         this.setState({
@@ -42,10 +40,6 @@ export default class SelectionModal extends React.Component {
             selected: false
         });
         this.props.closeModal()
-    }
-
-    playSound = () => {
-        this.clickSound.play();
     }
 
     render() {

@@ -22224,8 +22224,11 @@ var GroupSelectionDetail = function (_React$Component) {
             _this.setState({
                 showModal: false
             });
-            console.log(_this);
+            _this.selectionSound = new Audio("/assets/sounds/tada.WAV");
+            _this.clickSound = new Audio("/assets/sounds/taka.wav");
+            _this.clickSound.loop = true;
         }, _this.openSelectionModal = function () {
+            _this.soundManager('taka');
             _this.setState({
                 showSelectionModal: true
             });
@@ -22243,6 +22246,22 @@ var GroupSelectionDetail = function (_React$Component) {
                 that.props.activeSelection.drawn = true;
                 that.forceUpdate();
             });
+            _this.soundManager('stopTaka');
+        }, _this.soundManager = function (audio) {
+            switch (audio) {
+                case 'taka':
+                    _this.clickSound.play();
+                    break;
+                case 'tada':
+                    _this.soundManager("stopTaka");
+                    _this.selectionSound.play();
+                    break;
+                case 'stopTaka':
+                    _this.clickSound.pause();
+                    _this.clickSound.currentTime = 0;
+                    break;
+
+            }
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -22299,7 +22318,8 @@ var GroupSelectionDetail = function (_React$Component) {
                         activeSelection: this.props.activeSelection,
                         showModal: this.state.showSelectionModal,
                         closeModal: this.closeModal,
-                        list: this.props.list
+                        list: this.props.list,
+                        soundManager: this.soundManager
                     })
                 ) : _react2.default.createElement(
                     'h1',
@@ -22839,8 +22859,7 @@ var SelectionModal = function (_React$Component) {
             });
 
             _this.selectionSound = new Audio("/assets/sounds/tada.WAV");
-            _this.clickSound = new Audio("/assets/sounds/taka.wav");
-            _this.clickSound.loop = true;
+            _this.clickSound = new Audio("/assets/sounds/taka.WAV");
         }, _this.componentDidUpdate = function (prev) {
             if (_this.props.activeSelection._id !== prev.activeSelection._id) {
                 _this.setState({
@@ -22849,8 +22868,7 @@ var SelectionModal = function (_React$Component) {
                 });
             }
         }, _this.makeSelection = function () {
-            _this.clickSound.pause();
-            _this.clickSound.currentTime = 0;
+            _this.props.soundManager('tada');
             _this.selectionSound.play();
             var that = _this;
             _this.setState({
@@ -22861,8 +22879,6 @@ var SelectionModal = function (_React$Component) {
                 selected: false
             });
             _this.props.closeModal();
-        }, _this.playSound = function () {
-            _this.clickSound.play();
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 

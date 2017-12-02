@@ -14,10 +14,13 @@ export default class GroupSelectionDetail extends React.Component {
         this.setState({
             showModal: false
         });
-        console.log(this)
+        this.selectionSound = new Audio("/assets/sounds/tada.WAV");
+        this.clickSound = new Audio("/assets/sounds/taka.wav");
+        this.clickSound.loop = true;
     }
 
     openSelectionModal = () => {
+        this.soundManager('taka')
         this.setState({
             showSelectionModal: true
         });
@@ -41,6 +44,24 @@ export default class GroupSelectionDetail extends React.Component {
                 that.props.activeSelection.drawn = true;
                 that.forceUpdate();
             });
+        this.soundManager('stopTaka');
+    }
+
+    soundManager = (audio) => {
+        switch(audio) {
+            case 'taka':
+                this.clickSound.play();
+                break;
+            case 'tada':
+                this.soundManager("stopTaka");
+                this.selectionSound.play();
+                break
+            case 'stopTaka':
+                this.clickSound.pause();
+                this.clickSound.currentTime = 0;
+                break;
+
+        }
     }
 
     render() {
@@ -77,6 +98,7 @@ export default class GroupSelectionDetail extends React.Component {
                                 showModal={this.state.showSelectionModal}
                                 closeModal={this.closeModal} 
                                 list={this.props.list}
+                                soundManager={this.soundManager}
                             />
                         </div>
                         ) : (
