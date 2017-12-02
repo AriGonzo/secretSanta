@@ -13,6 +13,10 @@ var UserSchema = new Schema({
 		ref: 'User'
 	},
 	requests: [String],
+	wishlist: [{
+		type: Schema.Types.ObjectId, 
+		ref: 'WishListItem'
+	}],
 	drawn: {type: Boolean, default: false}
 });
 

@@ -41,6 +41,10 @@ input {
 	color: #f8f8f8;
 }
 
+.autoMargin {
+	margin: auto;
+}
+
 .amatic {
 	font-family: 'Gochi Hand', cursive !important;
 }
@@ -154,7 +158,7 @@ button {
 
 /* Group List */
 
-.groupListItem {
+.groupListItem, .wishListItem {
 	background-color: #f8f8f8;
 	color: green;
 	cursor: pointer;
@@ -196,6 +200,71 @@ button {
 
 .userDrawerIcon {
 	color: #CC231E;
+}
+
+/* Wishlist */
+
+.wishlist {
+	margin-top: 35px;
+}
+
+.wishlist h3 {
+	position: relative;
+}
+
+.addWish {
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+}
+
+.addWish i {
+	font-size: 30px;
+}
+
+.addWishText {
+	font-size: 18px;
+	vertical-align: super;
+}
+
+.wishlistWrapper {
+	height: 250px;
+	overflow: scroll;
+}
+
+.wishlistItem {
+	margin: 0;
+}
+
+.wishlistItem .wishlistItemPicture i {
+	font-size: 35px;
+}
+
+.wishlistItemPicture {
+	position: relative;
+}
+
+.wishlistItem h4 {
+	margin: 0;
+	font-size: 20px;
+}
+
+.wishlistItem > div {
+	padding: 20px 0 0 0;
+}
+
+.metaDataPreview h5 {
+	margin-bottom: 0;
+	font-size: 17px;
+}
+
+.wishModalBody {
+
+}
+
+.wishModalBody input {
+	width: 100%;
+	margin: 10px 0;
 }
 
 /* Media Queries */

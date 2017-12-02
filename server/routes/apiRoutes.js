@@ -1,9 +1,13 @@
+//Packages
 const path = require('path');
 const async = require('async');
 
+//Models
 const User = require('../models/User');
 const List = require('../models/List');
+const Wish = require('../models/Wish');
 
+//Services
 const assignmentService = require('../services/assignmentService');
 const emailService = require('../services/emailService');
 
@@ -33,11 +37,23 @@ module.exports = function(app){
 			});
 			break
 			case 'list':
-			List.findById(userId).populate({
-				path: "members",
-				populate: {path: "selected"}
-			}).populate('captain').exec(function(err, oList){
-				res.send(oList);
+			List
+				.findById(userId)
+				.populate({
+					path: "members",
+					model: "User",
+					populate: {
+						path: "selected"
+					}
+				})
+				.populate('captain')
+				.exec(function(err, oList){
+					List.populate(oList, {
+						path: 'members.wishlist',
+						model: 'Wish'
+					}, function(err, uList){
+						res.send(uList);
+					});
 			});
 			break
 			default:
@@ -139,5 +155,20 @@ module.exports = function(app){
 
 	app.put('/user/:userId', function(){
 		let userId = req.params.userId;
+	});
+
+	app.post('/addWish', function(req, res){
+		let userId = req.params.userId;
+		let wish = req.params.wish;
+
+		User.findById(userId).exec(function(err, oUser){
+			let oWish = new Wish(wish);
+			oWish.save(function(){
+				oUser.wishlist.push(oWish);
+				oUser.save(function(){
+					res.send(oWish)
+				});
+			});
+		});
 	});
 }

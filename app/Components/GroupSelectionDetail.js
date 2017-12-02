@@ -5,6 +5,7 @@ import {
 
 import GroupPageListItem from './GroupPageListItem';
 import SelectionModal from './SelectionModal';
+import Wishlist from './Wishlist';
 
 import {API} from '../util/api';
 
@@ -99,6 +100,9 @@ export default class GroupSelectionDetail extends React.Component {
                                 closeModal={this.closeModal} 
                                 list={this.props.list}
                                 soundManager={this.soundManager}
+                            />
+                            <Wishlist 
+                                activeSelection={this.props.activeSelection}
                             />
                         </div>
                         ) : (

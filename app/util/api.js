@@ -33,5 +33,8 @@ export const API = {
     },
     triggerEmail: function(userId){
         return axios.post('/triggerEmail', {userId});
+    },
+    addWish: function(userId, wish){
+        return axios.post('/addWish', {userId, wish});
     }
 };
