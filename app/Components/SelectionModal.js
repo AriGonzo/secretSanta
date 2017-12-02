@@ -12,6 +12,9 @@ export default class SelectionModal extends React.Component {
             selected: false,
             selectionMade: this.props.activeSelection.selected
         });
+
+        this.selectionSound = new Audio("/assets/sounds/tada.WAV");
+        this.clickSound = new Audio("/assets/sounds/taka.WAV");
     }
 
     componentDidUpdate = (prev) => {
@@ -24,6 +27,9 @@ export default class SelectionModal extends React.Component {
     }
 
     makeSelection = () => {
+        this.clickSound.pause();
+        this.clickSound.currentTime = 0;
+        this.selectionSound.play();
         let that = this;
         this.setState({
             selected: true
@@ -36,10 +42,15 @@ export default class SelectionModal extends React.Component {
         });
         this.props.closeModal()
     }
+    
+    playSound = () => {
+        this.clickSound.loop = true;
+        this.clickSound.play();
+    }
 
     render() {
         return (
-            <Modal show={this.props.showModal} onExited={()=> {this.cleanupData()}}>
+            <Modal show={this.props.showModal} onEntered={this.playSound} onExited={()=> {this.cleanupData()}}>
                 <Modal.Header>
                     <Modal.Title bsClass="amatic largerText">Draw - {this.props.activeSelection.name}</Modal.Title>
                 </Modal.Header>

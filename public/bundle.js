@@ -22837,6 +22837,9 @@ var SelectionModal = function (_React$Component) {
                 selected: false,
                 selectionMade: _this.props.activeSelection.selected
             });
+
+            _this.selectionSound = new Audio("/assets/sounds/tada.WAV");
+            _this.clickSound = new Audio("/assets/sounds/taka.WAV");
         }, _this.componentDidUpdate = function (prev) {
             if (_this.props.activeSelection._id !== prev.activeSelection._id) {
                 _this.setState({
@@ -22845,6 +22848,9 @@ var SelectionModal = function (_React$Component) {
                 });
             }
         }, _this.makeSelection = function () {
+            _this.clickSound.pause();
+            _this.clickSound.currentTime = 0;
+            _this.selectionSound.play();
             var that = _this;
             _this.setState({
                 selected: true
@@ -22854,6 +22860,9 @@ var SelectionModal = function (_React$Component) {
                 selected: false
             });
             _this.props.closeModal();
+        }, _this.playSound = function () {
+            _this.clickSound.loop = true;
+            _this.clickSound.play();
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -22864,7 +22873,7 @@ var SelectionModal = function (_React$Component) {
 
             return _react2.default.createElement(
                 _reactBootstrap.Modal,
-                { show: this.props.showModal, onExited: function onExited() {
+                { show: this.props.showModal, onEntered: this.playSound, onExited: function onExited() {
                         _this2.cleanupData();
                     } },
                 _react2.default.createElement(
