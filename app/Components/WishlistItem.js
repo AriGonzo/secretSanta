@@ -9,7 +9,7 @@ export default class WishlistItem extends React.Component {
             		<i className="material-icons">card_giftcard</i>
             	</div>
             	<div className="col-md-9 col-sm-9 col-xs-9 text-left wishlistItemDetails">
-            		<h4>Here is the description by the user</h4>
+            		<h4>{this.props.wish.description}</h4>
             		<div className="metaDataPreview">
             			<h5>Header for Meta Preview</h5>
             			<p>Here is where the url description would come from</p>

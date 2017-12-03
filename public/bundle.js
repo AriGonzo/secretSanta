@@ -21903,7 +21903,7 @@ var AddWishModal = function (_React$Component) {
                 description: "",
                 url: ""
             });
-        }, _this.onChange = function (event) {
+        }, _this.onChangeUrl = function () {}, _this.onChange = function (event) {
             var target = event.target;
             var value = target.value;
             var name = target.name;
@@ -21917,13 +21917,9 @@ var AddWishModal = function (_React$Component) {
     _createClass(AddWishModal, [{
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
             return _react2.default.createElement(
                 _reactBootstrap.Modal,
-                { show: this.props.showModal, onEntered: this.playSound, onExited: function onExited() {
-                        _this2.cleanupData();
-                    } },
+                { show: this.props.showModal, onEntered: this.playSound },
                 _react2.default.createElement(
                     _reactBootstrap.Modal.Header,
                     null,
@@ -21939,8 +21935,8 @@ var AddWishModal = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'wishModalBody' },
-                        _react2.default.createElement('input', { placeholder: 'Description', name: 'description', className: 'full-width amatic', type: 'text', onChange: this.handleInputChange }),
-                        _react2.default.createElement('input', { placeholder: 'Url', name: 'url', className: 'full-width amatic', type: 'text', onChange: this.handleInputChange })
+                        _react2.default.createElement('input', { placeholder: 'Description', name: 'description', className: 'full-width amatic', type: 'text', onChange: this.onChange }),
+                        _react2.default.createElement('input', { placeholder: 'Url', name: 'url', className: 'full-width amatic', type: 'text', onChange: this.onChangeUrl })
                     ),
                     _react2.default.createElement('div', { className: 'scrappedPreview' })
                 ),
@@ -23233,7 +23229,7 @@ var Wishlist = function (_React$Component) {
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Wishlist.__proto__ || Object.getPrototypeOf(Wishlist)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
             _this.setState({
                 showWishModal: false,
-                wishlist: _this.props.wishlist
+                activeSelection: _this.props.activeSelection
             });
         }, _this.openNewWishModal = function () {
             _this.setState({
@@ -23245,13 +23241,13 @@ var Wishlist = function (_React$Component) {
             });
         }, _this.addWish = function (wish) {
             var that = _this;
-            _api.API.addWish(_this.props.activeSelection._id, wish).then(function (wishAdded) {
-                var newArray = that.state.wishlist.slice();
-                newArray.push(wishAdded);
-                that.setState({
-                    wishlist: newArray
-                });
+            _api.API.addWish(_this.state.activeSelection._id, wish).then(function (wishAdded) {
+                that.props.activeSelection.wishlist.unshift(wishAdded.data);
                 that.closeModal();
+            });
+        }, _this.renderWishes = function () {
+            return _this.props.activeSelection.wishlist.map(function (wish) {
+                return _react2.default.createElement(_WishlistItem2.default, { wish: wish });
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -23284,13 +23280,10 @@ var Wishlist = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'wishlistWrapper' },
-                    _react2.default.createElement(_WishlistItem2.default, null),
-                    _react2.default.createElement(_WishlistItem2.default, null),
-                    _react2.default.createElement(_WishlistItem2.default, null),
-                    _react2.default.createElement(_WishlistItem2.default, null)
+                    this.renderWishes()
                 ),
                 _react2.default.createElement(_AddWishModal2.default, {
-                    activeSelection: this.props.activeSelection,
+                    activeSelection: this.state.activeSelection,
                     showModal: this.state.showWishModal,
                     closeModal: this.closeModal,
                     addWish: this.addWish
@@ -23359,7 +23352,7 @@ var WishlistItem = function (_React$Component) {
                     _react2.default.createElement(
                         "h4",
                         null,
-                        "Here is the description by the user"
+                        this.props.wish.description
                     ),
                     _react2.default.createElement(
                         "div",

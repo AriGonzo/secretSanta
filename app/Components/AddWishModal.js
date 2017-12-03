@@ -14,6 +14,10 @@ export default class AddWishModal extends React.Component {
         })
     }
 
+    onChangeUrl = () => {
+        
+    }
+
     onChange = (event) => {
         const target = event.target;
         const value = target.value;
@@ -30,14 +34,14 @@ export default class AddWishModal extends React.Component {
 
     render() {
         return (
-            <Modal show={this.props.showModal} onEntered={this.playSound} onExited={()=> {this.cleanupData()}}>
+            <Modal show={this.props.showModal} onEntered={this.playSound} >
                 <Modal.Header>
                     <Modal.Title bsClass="amatic largerText">Add Wish</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="wishModalBody">
-                        <input placeholder="Description" name="description" className="full-width amatic" type="text" onChange={this.handleInputChange} />
-                        <input placeholder="Url" name="url" className="full-width amatic" type="text" onChange={this.handleInputChange} />
+                        <input placeholder="Description" name="description" className="full-width amatic" type="text" onChange={this.onChange} />
+                        <input placeholder="Url" name="url" className="full-width amatic" type="text" onChange={this.onChangeUrl} />
                     </div>
                     <div className="scrappedPreview"></div>
                 </Modal.Body>

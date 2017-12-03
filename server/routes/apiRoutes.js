@@ -158,13 +158,13 @@ module.exports = function(app){
 	});
 
 	app.post('/addWish', function(req, res){
-		let userId = req.params.userId;
-		let wish = req.params.wish;
+		let userId = req.body.userId;
+		let wish = req.body.wish;
 
 		User.findById(userId).exec(function(err, oUser){
 			let oWish = new Wish(wish);
 			oWish.save(function(){
-				oUser.wishlist.push(oWish);
+				oUser.wishlist.unshift(oWish);
 				oUser.save(function(){
 					res.send(oWish)
 				});

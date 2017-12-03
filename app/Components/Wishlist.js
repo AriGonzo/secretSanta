@@ -10,7 +10,7 @@ export default class Wishlist extends React.Component {
 	componentWillMount = () => {
 		this.setState({
 			showWishModal: false,
-            wishlist: this.props.wishlist
+            activeSelection: this.props.activeSelection
 		});
 	}
 
@@ -28,17 +28,18 @@ export default class Wishlist extends React.Component {
 
     addWish = (wish) => {
         let that = this;
-        API.addWish(this.props.activeSelection._id, wish)
+        API.addWish(this.state.activeSelection._id, wish)
             .then(function(wishAdded){
-                let newArray = that.state.wishlist.slice();
-                newArray.push(wishAdded)
-                that.setState({
-                    wishlist: newArray
-                });
+                that.props.activeSelection.wishlist.unshift(wishAdded.data)
                 that.closeModal();
             });
     }
 
+    renderWishes = () => {
+        return this.props.activeSelection.wishlist.map(function(wish){
+            return <WishlistItem wish={wish} />
+        });
+    }
     render() {
         return (
             <div className="full-width autoMargin wishlist">
@@ -48,13 +49,12 @@ export default class Wishlist extends React.Component {
         			</span>
     			</h3>
             	<div className="wishlistWrapper">
-	            	<WishlistItem />
-	            	<WishlistItem />
-	            	<WishlistItem />
-	            	<WishlistItem />
+                {
+                    this.renderWishes()
+                }
             	</div>
                 <AddWishModal 
-                    activeSelection={this.props.activeSelection}
+                    activeSelection={this.state.activeSelection}
                     showModal={this.state.showWishModal}
                     closeModal={this.closeModal} 
                     addWish={this.addWish}
