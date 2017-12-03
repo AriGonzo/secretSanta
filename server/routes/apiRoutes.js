@@ -1,6 +1,7 @@
 //Packages
 const path = require('path');
 const async = require('async');
+const scrape = require('html-metadata');
 
 //Models
 const User = require('../models/User');
@@ -170,5 +171,14 @@ module.exports = function(app){
 				});
 			});
 		});
+	});
+
+	app.post('/scrapeWebsite', function(req, res){
+		let url = req.body.url;
+		
+		scrape(url).then(function(metaData){
+			res.send(metaData)
+		});
+
 	});
 }

@@ -36,5 +36,8 @@ export const API = {
     },
     addWish: function(userId, wish){
         return axios.post('/addWish', {userId, wish});
+    },
+    scrapeWebsite: function(url){
+        return axios.post('/scrapeWebsite', {url})
     }
 };

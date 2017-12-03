@@ -36,8 +36,8 @@ export default class Wishlist extends React.Component {
     }
 
     renderWishes = () => {
-        return this.props.activeSelection.wishlist.map(function(wish){
-            return <WishlistItem wish={wish} />
+        return this.props.activeSelection.wishlist.map(function(wish, i){
+            return <WishlistItem key={i} wish={wish} />
         });
     }
     render() {

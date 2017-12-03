@@ -3503,6 +3503,9 @@ var API = exports.API = {
     },
     addWish: function addWish(userId, wish) {
         return _axios2.default.post('/addWish', { userId: userId, wish: wish });
+    },
+    scrapeWebsite: function scrapeWebsite(url) {
+        return _axios2.default.post('/scrapeWebsite', { url: url });
     }
 };
 
@@ -21874,6 +21877,8 @@ var _reactTextLoop = __webpack_require__(239);
 
 var _reactTextLoop2 = _interopRequireDefault(_reactTextLoop);
 
+var _api = __webpack_require__(37);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -21901,9 +21906,33 @@ var AddWishModal = function (_React$Component) {
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AddWishModal.__proto__ || Object.getPrototypeOf(AddWishModal)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
             _this.setState({
                 description: "",
-                url: ""
+                url: "",
+                validUrl: false,
+                metadata: false
             });
-        }, _this.onChangeUrl = function () {}, _this.onChange = function (event) {
+        }, _this.onChangeUrl = function (event) {
+            var target = event.target;
+            var url = target.value;
+            var that = _this;
+
+            var validUrl = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z‌​]{2,6}\b([-a-zA-Z0-9‌​@:%_\+.~#?&=]*)/.test(url);
+
+            _this.setState({ validUrl: validUrl, url: url });
+
+            console.log(validUrl);
+            if (validUrl) {
+                _api.API.scrapeWebsite(url).then(function (metadata) {
+                    console.log(metadata);
+                    that.setState({
+                        metadata: true,
+                        metaTitle: metadata.data.general.title,
+                        metaDescription: metadata.data.general.description
+                    });
+                });
+            } else {
+                _this.setState({ metadata: false, metaTitle: "", metaDescription: "" });
+            }
+        }, _this.onChange = function (event) {
             var target = event.target;
             var value = target.value;
             var name = target.name;
@@ -21911,6 +21940,8 @@ var AddWishModal = function (_React$Component) {
             _this.setState(_defineProperty({}, name, value));
         }, _this.addWish = function () {
             _this.props.addWish(_this.state);
+        }, _this.cleanupData = function () {
+            _this.setState({ metadata: false, validUrl: false, url: "", description: "" });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -21919,7 +21950,7 @@ var AddWishModal = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 _reactBootstrap.Modal,
-                { show: this.props.showModal, onEntered: this.playSound },
+                { show: this.props.showModal, onEntered: this.playSound, onExited: this.cleanupData },
                 _react2.default.createElement(
                     _reactBootstrap.Modal.Header,
                     null,
@@ -21936,9 +21967,35 @@ var AddWishModal = function (_React$Component) {
                         'div',
                         { className: 'wishModalBody' },
                         _react2.default.createElement('input', { placeholder: 'Description', name: 'description', className: 'full-width amatic', type: 'text', onChange: this.onChange }),
-                        _react2.default.createElement('input', { placeholder: 'Url', name: 'url', className: 'full-width amatic', type: 'text', onChange: this.onChangeUrl })
+                        _react2.default.createElement('input', { placeholder: 'Url', name: 'url', className: 'full-width amatic', type: 'text', onChange: this.onChangeUrl }),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'amatic pull-right ' + (this.state.url.length <= 0 ? 'hide' : this.state.validUrl ? 'hide' : '') },
+                            _react2.default.createElement(
+                                'em',
+                                null,
+                                'Please enter a valid URL'
+                            )
+                        )
                     ),
-                    _react2.default.createElement('div', { className: 'scrappedPreview' })
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'scrappedPreview amatic' },
+                        this.state.metadata ? _react2.default.createElement(
+                            'div',
+                            { className: 'metaDataPreview' },
+                            _react2.default.createElement(
+                                'h5',
+                                null,
+                                this.state.metaTitle
+                            ),
+                            _react2.default.createElement(
+                                'h4',
+                                null,
+                                this.state.metaDescription
+                            )
+                        ) : ""
+                    )
                 ),
                 _react2.default.createElement(
                     _reactBootstrap.Modal.Footer,
@@ -23246,8 +23303,8 @@ var Wishlist = function (_React$Component) {
                 that.closeModal();
             });
         }, _this.renderWishes = function () {
-            return _this.props.activeSelection.wishlist.map(function (wish) {
-                return _react2.default.createElement(_WishlistItem2.default, { wish: wish });
+            return _this.props.activeSelection.wishlist.map(function (wish, i) {
+                return _react2.default.createElement(_WishlistItem2.default, { key: i, wish: wish });
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -23326,9 +23383,21 @@ var WishlistItem = function (_React$Component) {
     _inherits(WishlistItem, _React$Component);
 
     function WishlistItem() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, WishlistItem);
 
-        return _possibleConstructorReturn(this, (WishlistItem.__proto__ || Object.getPrototypeOf(WishlistItem)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WishlistItem.__proto__ || Object.getPrototypeOf(WishlistItem)).call.apply(_ref, [this].concat(args))), _this), _this.openUrl = function () {
+            if (_this.props.wish.url) {
+                window.open(_this.props.wish.url, "_blank");
+            }
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(WishlistItem, [{
@@ -23336,7 +23405,7 @@ var WishlistItem = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                { className: "row amatic wishlistItem" },
+                { className: "row amatic wishlistItem", onClick: this.openUrl },
                 _react2.default.createElement(
                     "div",
                     { className: "col-md-3 col-sm-3 col-xs-3 wishlistItemPicture" },
@@ -23349,25 +23418,25 @@ var WishlistItem = function (_React$Component) {
                 _react2.default.createElement(
                     "div",
                     { className: "col-md-9 col-sm-9 col-xs-9 text-left wishlistItemDetails" },
-                    _react2.default.createElement(
+                    this.props.wish.description ? _react2.default.createElement(
                         "h4",
                         null,
                         this.props.wish.description
-                    ),
-                    _react2.default.createElement(
+                    ) : "",
+                    this.props.wish.metaTitle ? _react2.default.createElement(
                         "div",
                         { className: "metaDataPreview" },
                         _react2.default.createElement(
                             "h5",
                             null,
-                            "Header for Meta Preview"
+                            this.props.wish.metaTitle
                         ),
                         _react2.default.createElement(
                             "p",
                             null,
-                            "Here is where the url description would come from"
+                            this.props.wish.metaDescription
                         )
-                    )
+                    ) : ""
                 )
             );
         }
