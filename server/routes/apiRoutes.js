@@ -181,6 +181,8 @@ module.exports = function(app){
 		
 		scrape(url).then(function(metaData){
 			res.send(metaData)
+		}).catch(function(err){
+			console.log('err is', err)
 		});
 
 	});
