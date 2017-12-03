@@ -15,7 +15,8 @@ export default class AddWishModal extends React.Component {
             url: "",
             validUrl: false,
             metadata: false,
-            loading: false
+            loading: false,
+            errorScrape: false
         })
     }
 
@@ -29,18 +30,38 @@ export default class AddWishModal extends React.Component {
         this.setState({validUrl, url})
 
         if (validUrl) {
-            this.setState({loading: true})
+            this.setState({loading: true, errorScrape: false})
+            
+            console.log('running')
+
+            let errorTimeout = setTimeout(function(){
+                that.scrapeErrorTimeout();
+            }, 7 * 1000)
+
             API.scrapeWebsite(url).then(function(metadata){
-                that.setState({
-                    metadata: true,
-                    loading: false,
-                    metaTitle: metadata.data.general.title,
-                    metaDescription: metadata.data.general.description,
-                });
+                clearTimeout(errorTimeout);
+                if (metadata.data.general) {
+                    that.setState({
+                        metadata: true,
+                        loading: false,
+                        metaTitle: metadata.data.general.title,
+                        metaDescription: metadata.data.general.description,
+                    });
+                } else {
+                    that.scrapeErrorTimeout();
+                }
             });
+
         } else {
             this.setState({metadata: false, metaTitle: "", metaDescription: ""})
         }
+    }
+
+    scrapeErrorTimeout = () => {
+        this.setState({
+            errorScrape: true,
+            loading: false
+        });
     }
 
     onChange = (event) => {
@@ -58,7 +79,7 @@ export default class AddWishModal extends React.Component {
     }
 
     cleanupData = () => {
-        this.setState({metadata: false, validUrl: false, url: "", description: ""})
+        this.setState({metadata: false, validUrl: false, url: "", description: "", errorScrape: false})
     }
 
     render() {
@@ -82,6 +103,13 @@ export default class AddWishModal extends React.Component {
                                 <div className="metaDataPreview">
                                     <h5>{this.state.metaTitle}</h5>
                                     <h4>{this.state.metaDescription}</h4>
+                                </div>
+                            ) : ""
+                    }
+                    {
+                        this.state.errorScrape ? (
+                                <div className="metaDataPreview">
+                                    <h5>Preview Not Available</h5>
                                 </div>
                             ) : ""
                     }

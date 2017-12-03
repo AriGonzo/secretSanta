@@ -192,6 +192,7 @@ module.exports = function(app){
 			res.send(metaData)
 		}).catch(function(err){
 			console.log('err is', err)
+			res.send(err)
 		});
 
 	});

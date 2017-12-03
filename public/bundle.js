@@ -21909,7 +21909,8 @@ var AddWishModal = function (_React$Component) {
                 url: "",
                 validUrl: false,
                 metadata: false,
-                loading: false
+                loading: false,
+                errorScrape: false
             });
         }, _this.onChangeUrl = function (event) {
             var target = event.target;
@@ -21921,18 +21922,35 @@ var AddWishModal = function (_React$Component) {
             _this.setState({ validUrl: validUrl, url: url });
 
             if (validUrl) {
-                _this.setState({ loading: true });
+                _this.setState({ loading: true, errorScrape: false });
+
+                console.log('running');
+
+                var errorTimeout = setTimeout(function () {
+                    that.scrapeErrorTimeout();
+                }, 7 * 1000);
+
                 _api.API.scrapeWebsite(url).then(function (metadata) {
-                    that.setState({
-                        metadata: true,
-                        loading: false,
-                        metaTitle: metadata.data.general.title,
-                        metaDescription: metadata.data.general.description
-                    });
+                    clearTimeout(errorTimeout);
+                    if (metadata.data.general) {
+                        that.setState({
+                            metadata: true,
+                            loading: false,
+                            metaTitle: metadata.data.general.title,
+                            metaDescription: metadata.data.general.description
+                        });
+                    } else {
+                        that.scrapeErrorTimeout();
+                    }
                 });
             } else {
                 _this.setState({ metadata: false, metaTitle: "", metaDescription: "" });
             }
+        }, _this.scrapeErrorTimeout = function () {
+            _this.setState({
+                errorScrape: true,
+                loading: false
+            });
         }, _this.onChange = function (event) {
             var target = event.target;
             var value = target.value;
@@ -21942,7 +21960,7 @@ var AddWishModal = function (_React$Component) {
         }, _this.addWish = function () {
             _this.props.addWish(_this.state);
         }, _this.cleanupData = function () {
-            _this.setState({ metadata: false, validUrl: false, url: "", description: "" });
+            _this.setState({ metadata: false, validUrl: false, url: "", description: "", errorScrape: false });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -22000,6 +22018,15 @@ var AddWishModal = function (_React$Component) {
                                 'h4',
                                 null,
                                 this.state.metaDescription
+                            )
+                        ) : "",
+                        this.state.errorScrape ? _react2.default.createElement(
+                            'div',
+                            { className: 'metaDataPreview' },
+                            _react2.default.createElement(
+                                'h5',
+                                null,
+                                'Preview Not Available'
                             )
                         ) : ""
                     )
