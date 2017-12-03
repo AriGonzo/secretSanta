@@ -232,7 +232,7 @@ button {
 }
 
 .wishlistWrapper {
-	height: 250px;
+	height: 300px;
 	overflow: scroll;
 }
 
@@ -246,6 +246,10 @@ button {
 
 .wishlistItemPicture {
 	position: relative;
+}
+
+.wishlistItemPicture .iconWrapper {
+	padding-top: 10px;
 }
 
 .wishlistItem h4 {

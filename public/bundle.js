@@ -23424,9 +23424,18 @@ var WishlistItem = function (_React$Component) {
                     ),
                     _react2.default.createElement("br", null),
                     this.props.wish.url ? _react2.default.createElement(
-                        "i",
-                        { className: "material-icons" },
-                        "link"
+                        "div",
+                        { className: "iconWrapper" },
+                        _react2.default.createElement(
+                            "i",
+                            { className: "material-icons" },
+                            "link"
+                        ),
+                        _react2.default.createElement(
+                            "p",
+                            null,
+                            "link"
+                        )
                     ) : ""
                 ),
                 _react2.default.createElement(
