@@ -7,6 +7,7 @@ if (!process.env.NODE_ENV) {
 
 module.exports = {
     sendWishEmail: function(user, wisher){
+        let that = this;
         var mail = {
             from: "Secret Santa <secretsantaappcourier@gmail.com>",
             to: user.email,
@@ -14,7 +15,11 @@ module.exports = {
             text: `Your Secret Santa has updated their wishlist!`,
             html: `<h1>Your Secret Santa has updated their wishlist! <a href="frozen-dusk-64399.herokuapp.com">Click here to open the app</a></h1><p>If the link above does not work, copy and paste frozen-dusk-64399.herokuapp.com<em></em></p>`
         }
-        this.sendEmail(mail)
+        user.lastNotified = Date.now();
+        user.save(function(err, oUser){
+            console.log('user saved', oUser.lastNotified)
+            that.sendEmail(mail);
+        });
     },
     sendReminderEmail: function(user){
         var mail = {

@@ -161,6 +161,8 @@ module.exports = function(app){
 	app.post('/addWish', function(req, res){
 		let userId = req.body.userId;
 		let wish = req.body.wish;
+		let FOUR_MINUTES = 240000;
+		let SIX_HOURS = 2.16e+7;
 
 		User.findById(userId).exec(function(err, oUser){
 			let oWish = new Wish(wish);
@@ -168,7 +170,14 @@ module.exports = function(app){
 				oUser.wishlist.unshift(oWish);
 				oUser.save(function(){
 					User.findOne({selected: oUser._id}).exec(function(err, xUser){
-						emailService.sendWishEmail(xUser, oUser);
+
+						let userNotification = xUser.lastNotified ? false : true;
+						
+						if ( userNotification || Date.now() - xUser.lastNotified > SIX_HOURS) {
+							emailService.sendWishEmail(xUser, oUser);
+						} else {
+							console.log('too soon to send another email')
+						}
 						res.send(oWish);
 					});
 				});

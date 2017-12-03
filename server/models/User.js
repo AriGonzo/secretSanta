@@ -17,7 +17,8 @@ var UserSchema = new Schema({
 		type: Schema.Types.ObjectId, 
 		ref: 'WishListItem'
 	}],
-	drawn: {type: Boolean, default: false}
+	drawn: {type: Boolean, default: false},
+	lastNotified: Number
 });
 
 module.exports = mongoose.model('User', UserSchema);
