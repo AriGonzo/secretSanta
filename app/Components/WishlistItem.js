@@ -12,7 +12,13 @@ export default class WishlistItem extends React.Component {
         return (
             <div className="row amatic wishlistItem" onClick={this.openUrl}>
             	<div className="col-md-3 col-sm-3 col-xs-3 wishlistItemPicture">
-            		<i className="material-icons">card_giftcard</i>
+            		<i className={`material-icons ${ this.props.hideIcon ? 'hide' : '' }`}>card_giftcard</i>
+                    <br />
+                    {
+                        this.props.wish.url ? (
+                                <i className="material-icons">link</i>
+                            ) : ""
+                    }
             	</div>
             	<div className="col-md-9 col-sm-9 col-xs-9 text-left wishlistItemDetails">
                     {

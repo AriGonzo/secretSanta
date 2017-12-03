@@ -14,7 +14,8 @@ export default class AddWishModal extends React.Component {
             description: "",
             url: "",
             validUrl: false,
-            metadata: false
+            metadata: false,
+            loading: false
         })
     }
 
@@ -27,14 +28,14 @@ export default class AddWishModal extends React.Component {
 
         this.setState({validUrl, url})
 
-        console.log(validUrl)
         if (validUrl) {
+            this.setState({loading: true})
             API.scrapeWebsite(url).then(function(metadata){
-                console.log(metadata)
                 that.setState({
                     metadata: true,
+                    loading: false,
                     metaTitle: metadata.data.general.title,
-                    metaDescription: metadata.data.general.description
+                    metaDescription: metadata.data.general.description,
                 });
             });
         } else {
@@ -71,6 +72,9 @@ export default class AddWishModal extends React.Component {
                         <input placeholder="Description" name="description" className="full-width amatic" type="text" onChange={this.onChange} />
                         <input placeholder="Url" name="url" className="full-width amatic" type="text" onChange={this.onChangeUrl} />
                         <p className={`amatic pull-right ${ this.state.url.length <= 0  ? 'hide': this.state.validUrl ? 'hide' : '' }`} ><em>Please enter a valid URL</em></p>
+                    </div>
+                    <div className={`loadingIndicator text-center amatic ${ this.state.loading ? '' : 'hide'}`}>
+                        Fetching Preview <img src="/assets/images/loader.gif" width="40px" />
                     </div>
                     <div className="scrappedPreview amatic">
                     {

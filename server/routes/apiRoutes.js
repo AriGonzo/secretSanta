@@ -148,7 +148,7 @@ module.exports = function(app){
 		let userId = req.body.userId;
 
 		User.findById(userId).populate('selected').exec(function(err, oUser){
-			emailService.sendEmail(oUser);
+			emailService.sendReminderEmail(oUser);
 			res.send("ok")
 		});
 
@@ -167,7 +167,10 @@ module.exports = function(app){
 			oWish.save(function(){
 				oUser.wishlist.unshift(oWish);
 				oUser.save(function(){
-					res.send(oWish)
+					User.findOne({selected: oUser._id}).exec(function(err, xUser){
+						emailService.sendWishEmail(xUser, oUser);
+						res.send(oWish);
+					});
 				});
 			});
 		});

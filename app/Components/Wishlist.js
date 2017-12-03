@@ -28,7 +28,8 @@ export default class Wishlist extends React.Component {
 
     addWish = (wish) => {
         let that = this;
-        API.addWish(this.state.activeSelection._id, wish)
+        console.log(this.props.activeSelection)
+        API.addWish(this.props.activeSelection._id, wish)
             .then(function(wishAdded){
                 that.props.activeSelection.wishlist.unshift(wishAdded.data)
                 that.closeModal();
@@ -50,11 +51,12 @@ export default class Wishlist extends React.Component {
     			</h3>
             	<div className="wishlistWrapper">
                 {
-                    this.renderWishes()
+                    this.props.activeSelection.wishlist.length > 0 ? this.renderWishes() : <WishlistItem hideIcon="true" wish={{description: "Your Wishlist is Empty! Add a wish!"}} />
+                        
                 }
             	</div>
                 <AddWishModal 
-                    activeSelection={this.state.activeSelection}
+                    activeSelection={this.props.activeSelection}
                     showModal={this.state.showWishModal}
                     closeModal={this.closeModal} 
                     addWish={this.addWish}

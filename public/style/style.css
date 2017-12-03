@@ -15,6 +15,10 @@ li {
 	list-style-type: none;
 }
 
+button.btn {
+	border-radius: 0;
+}
+
 #app > .container {
 	/*background-color: #0F8A5F;*/
 	background: url("https://hbagc.com/wp-content/uploads/2015/11/dark-green-christmas-background.jpg");

@@ -20,8 +20,11 @@ app.use(express.static('./node_modules'));
 // -------------------------------------------------
 
 // MongoDB Configuration configuration (Change this URL to your own DB)
-// mongoose.connect('mongodb://localhost:27017/secretSanta');
-mongoose.connect('mongodb://heroku_w7m695c4:rjq0qm60jc9ctrt2latg5sajpe@ds121696.mlab.com:21696/heroku_w7m695c4')
+if (!process.env.NODE_ENV) {
+    mongoose.connect('mongodb://localhost:27017/secretSanta');
+} else {
+	mongoose.connect('mongodb://heroku_w7m695c4:rjq0qm60jc9ctrt2latg5sajpe@ds121696.mlab.com:21696/heroku_w7m695c4')
+}
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 

@@ -1097,7 +1097,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 var _prodInvariant = __webpack_require__(12);
 
-var DOMProperty = __webpack_require__(36);
+var DOMProperty = __webpack_require__(37);
 var ReactDOMComponentFlags = __webpack_require__(211);
 
 var invariant = __webpack_require__(10);
@@ -2441,7 +2441,7 @@ if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 var store = __webpack_require__(104)('wks');
 var uid = __webpack_require__(70);
-var Symbol = __webpack_require__(34).Symbol;
+var Symbol = __webpack_require__(35).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
 var $exports = module.exports = function (name) {
@@ -3154,7 +3154,61 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(34);
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.API = undefined;
+
+var _axios = __webpack_require__(248);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var API = exports.API = {
+    getAllLists: function getAllLists() {
+        return _axios2.default.get('/allLists');
+    },
+    getAllUsers: function getAllUsers(listId) {},
+    getData: function getData(type, id) {
+        return _axios2.default.get('/data/' + type + '/' + id);
+    },
+    newList: function newList(listData) {
+        return _axios2.default.post('/list', {
+            name: listData.name,
+            users: listData.users
+        });
+    },
+    applyExceptions: function applyExceptions(list) {
+        return _axios2.default.post('/applyExceptions', { list: list });
+    },
+    addUserSelection: function addUserSelection(userId, selectionId) {
+        return _axios2.default.put('/addUserSelection', { userId: userId, selectionId: selectionId });
+    },
+    updateUser: function updateUser(userData, id) {},
+    deleteUser: function deleteUser(id) {},
+    updateDrawn: function updateDrawn(userId) {
+        return _axios2.default.put('/updateDrawn', { userId: userId });
+    },
+    triggerEmail: function triggerEmail(userId) {
+        return _axios2.default.post('/triggerEmail', { userId: userId });
+    },
+    addWish: function addWish(userId, wish) {
+        return _axios2.default.post('/addWish', { userId: userId, wish: wish });
+    },
+    scrapeWebsite: function scrapeWebsite(url) {
+        return _axios2.default.post('/scrapeWebsite', { url: url });
+    }
+};
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(35);
 var core = __webpack_require__(27);
 var ctx = __webpack_require__(96);
 var hide = __webpack_require__(46);
@@ -3218,7 +3272,7 @@ module.exports = $export;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -3230,7 +3284,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3243,7 +3297,7 @@ exports.default = !!(typeof window !== 'undefined' && window.document && window.
 module.exports = exports['default'];
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3454,60 +3508,6 @@ var DOMProperty = {
 
 module.exports = DOMProperty;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.API = undefined;
-
-var _axios = __webpack_require__(248);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var API = exports.API = {
-    getAllLists: function getAllLists() {
-        return _axios2.default.get('/allLists');
-    },
-    getAllUsers: function getAllUsers(listId) {},
-    getData: function getData(type, id) {
-        return _axios2.default.get('/data/' + type + '/' + id);
-    },
-    newList: function newList(listData) {
-        return _axios2.default.post('/list', {
-            name: listData.name,
-            users: listData.users
-        });
-    },
-    applyExceptions: function applyExceptions(list) {
-        return _axios2.default.post('/applyExceptions', { list: list });
-    },
-    addUserSelection: function addUserSelection(userId, selectionId) {
-        return _axios2.default.put('/addUserSelection', { userId: userId, selectionId: selectionId });
-    },
-    updateUser: function updateUser(userData, id) {},
-    deleteUser: function deleteUser(id) {},
-    updateDrawn: function updateDrawn(userId) {
-        return _axios2.default.put('/updateDrawn', { userId: userId });
-    },
-    triggerEmail: function triggerEmail(userId) {
-        return _axios2.default.post('/triggerEmail', { userId: userId });
-    },
-    addWish: function addWish(userId, wish) {
-        return _axios2.default.post('/addWish', { userId: userId, wish: wish });
-    },
-    scrapeWebsite: function scrapeWebsite(url) {
-        return _axios2.default.post('/scrapeWebsite', { url: url });
-    }
-};
 
 /***/ }),
 /* 38 */
@@ -4082,7 +4082,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(35);
+var _inDOM = __webpack_require__(36);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -5593,7 +5593,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(35);
+var _inDOM = __webpack_require__(36);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -8077,7 +8077,7 @@ module.exports = function (key) {
 /* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(34);
+var global = __webpack_require__(35);
 var SHARED = '__core-js_shared__';
 var store = global[SHARED] || (global[SHARED] = {});
 module.exports = function (key) {
@@ -8130,7 +8130,7 @@ module.exports = function (it, S) {
 /* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(34);
+var global = __webpack_require__(35);
 var core = __webpack_require__(27);
 var LIBRARY = __webpack_require__(99);
 var wksExt = __webpack_require__(109);
@@ -8159,7 +8159,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(35);
+var _inDOM = __webpack_require__(36);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -12402,7 +12402,7 @@ var _GroupSelectionDetail = __webpack_require__(273);
 
 var _GroupSelectionDetail2 = _interopRequireDefault(_GroupSelectionDetail);
 
-var _api = __webpack_require__(37);
+var _api = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12581,7 +12581,7 @@ module.exports = { "default": __webpack_require__(291), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(55);
-var document = __webpack_require__(34).document;
+var document = __webpack_require__(35).document;
 // typeof document.createElement is 'object' in old IE
 var is = isObject(document) && isObject(document.createElement);
 module.exports = function (it) {
@@ -12617,7 +12617,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 "use strict";
 
 var LIBRARY = __webpack_require__(99);
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 var redefine = __webpack_require__(167);
 var hide = __webpack_require__(46);
 var has = __webpack_require__(38);
@@ -12943,7 +12943,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.animationEnd = exports.animationDelay = exports.animationTiming = exports.animationDuration = exports.animationName = exports.transitionEnd = exports.transitionDuration = exports.transitionDelay = exports.transitionTiming = exports.transitionProperty = exports.transform = undefined;
 
-var _inDOM = __webpack_require__(35);
+var _inDOM = __webpack_require__(36);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -13106,7 +13106,7 @@ exports.default = function (recalc) {
   return size;
 };
 
-var _inDOM = __webpack_require__(35);
+var _inDOM = __webpack_require__(36);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -17033,7 +17033,7 @@ module.exports = PooledClass.addPoolingTo(CallbackQueue);
 
 
 
-var DOMProperty = __webpack_require__(36);
+var DOMProperty = __webpack_require__(37);
 var ReactDOMComponentTree = __webpack_require__(16);
 var ReactInstrumentation = __webpack_require__(26);
 
@@ -17756,7 +17756,7 @@ module.exports = ReactInputSelection;
 var _prodInvariant = __webpack_require__(12);
 
 var DOMLazyTree = __webpack_require__(49);
-var DOMProperty = __webpack_require__(36);
+var DOMProperty = __webpack_require__(37);
 var React = __webpack_require__(52);
 var ReactBrowserEventEmitter = __webpack_require__(85);
 var ReactCurrentOwner = __webpack_require__(31);
@@ -20820,7 +20820,7 @@ var _Navbar = __webpack_require__(277);
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
 
-var _api = __webpack_require__(37);
+var _api = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21877,7 +21877,7 @@ var _reactTextLoop = __webpack_require__(239);
 
 var _reactTextLoop2 = _interopRequireDefault(_reactTextLoop);
 
-var _api = __webpack_require__(37);
+var _api = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21908,7 +21908,8 @@ var AddWishModal = function (_React$Component) {
                 description: "",
                 url: "",
                 validUrl: false,
-                metadata: false
+                metadata: false,
+                loading: false
             });
         }, _this.onChangeUrl = function (event) {
             var target = event.target;
@@ -21919,12 +21920,12 @@ var AddWishModal = function (_React$Component) {
 
             _this.setState({ validUrl: validUrl, url: url });
 
-            console.log(validUrl);
             if (validUrl) {
+                _this.setState({ loading: true });
                 _api.API.scrapeWebsite(url).then(function (metadata) {
-                    console.log(metadata);
                     that.setState({
                         metadata: true,
+                        loading: false,
                         metaTitle: metadata.data.general.title,
                         metaDescription: metadata.data.general.description
                     });
@@ -21977,6 +21978,12 @@ var AddWishModal = function (_React$Component) {
                                 'Please enter a valid URL'
                             )
                         )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'loadingIndicator text-center amatic ' + (this.state.loading ? '' : 'hide') },
+                        'Fetching Preview ',
+                        _react2.default.createElement('img', { src: '/assets/images/loader.gif', width: '40px' })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -22234,7 +22241,7 @@ var _ExceptionListItem = __webpack_require__(269);
 
 var _ExceptionListItem2 = _interopRequireDefault(_ExceptionListItem);
 
-var _api = __webpack_require__(37);
+var _api = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22403,7 +22410,7 @@ var _Wishlist = __webpack_require__(281);
 
 var _Wishlist2 = _interopRequireDefault(_Wishlist);
 
-var _api = __webpack_require__(37);
+var _api = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22632,7 +22639,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(68);
 
-var _api = __webpack_require__(37);
+var _api = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22923,7 +22930,7 @@ var _GroupPage = __webpack_require__(154);
 
 var _GroupPage2 = _interopRequireDefault(_GroupPage);
 
-var _api = __webpack_require__(37);
+var _api = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23259,7 +23266,7 @@ var _AddWishModal = __webpack_require__(268);
 
 var _AddWishModal2 = _interopRequireDefault(_AddWishModal);
 
-var _api = __webpack_require__(37);
+var _api = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23298,7 +23305,8 @@ var Wishlist = function (_React$Component) {
             });
         }, _this.addWish = function (wish) {
             var that = _this;
-            _api.API.addWish(_this.state.activeSelection._id, wish).then(function (wishAdded) {
+            console.log(_this.props.activeSelection);
+            _api.API.addWish(_this.props.activeSelection._id, wish).then(function (wishAdded) {
                 that.props.activeSelection.wishlist.unshift(wishAdded.data);
                 that.closeModal();
             });
@@ -23337,10 +23345,10 @@ var Wishlist = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'wishlistWrapper' },
-                    this.renderWishes()
+                    this.props.activeSelection.wishlist.length > 0 ? this.renderWishes() : _react2.default.createElement(_WishlistItem2.default, { hideIcon: 'true', wish: { description: "Your Wishlist is Empty! Add a wish!" } })
                 ),
                 _react2.default.createElement(_AddWishModal2.default, {
-                    activeSelection: this.state.activeSelection,
+                    activeSelection: this.props.activeSelection,
                     showModal: this.state.showWishModal,
                     closeModal: this.closeModal,
                     addWish: this.addWish
@@ -23411,9 +23419,15 @@ var WishlistItem = function (_React$Component) {
                     { className: "col-md-3 col-sm-3 col-xs-3 wishlistItemPicture" },
                     _react2.default.createElement(
                         "i",
-                        { className: "material-icons" },
+                        { className: "material-icons " + (this.props.hideIcon ? 'hide' : '') },
                         "card_giftcard"
-                    )
+                    ),
+                    _react2.default.createElement("br", null),
+                    this.props.wish.url ? _react2.default.createElement(
+                        "i",
+                        { className: "material-icons" },
+                        "link"
+                    ) : ""
                 ),
                 _react2.default.createElement(
                     "div",
@@ -23664,7 +23678,7 @@ module.exports = function (it) {
 /* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var document = __webpack_require__(34).document;
+var document = __webpack_require__(35).document;
 module.exports = document && document.documentElement;
 
 
@@ -24019,7 +24033,7 @@ module.exports = __webpack_require__(27).getIteratorMethod = function (it) {
 "use strict";
 
 var ctx = __webpack_require__(96);
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 var toObject = __webpack_require__(106);
 var call = __webpack_require__(305);
 var isArrayIter = __webpack_require__(303);
@@ -24102,7 +24116,7 @@ addToUnscopables('entries');
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 
 $export($export.S + $export.F, 'Object', { assign: __webpack_require__(310) });
 
@@ -24111,7 +24125,7 @@ $export($export.S + $export.F, 'Object', { assign: __webpack_require__(310) });
 /* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 $export($export.S, 'Object', { create: __webpack_require__(100) });
 
@@ -24121,7 +24135,7 @@ $export($export.S, 'Object', { create: __webpack_require__(100) });
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 $export($export.S, 'Object', { setPrototypeOf: __webpack_require__(314).set });
 
 
@@ -24138,10 +24152,10 @@ $export($export.S, 'Object', { setPrototypeOf: __webpack_require__(314).set });
 "use strict";
 
 // ECMAScript 6 symbols shim
-var global = __webpack_require__(34);
+var global = __webpack_require__(35);
 var has = __webpack_require__(38);
 var DESCRIPTORS = __webpack_require__(45);
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 var redefine = __webpack_require__(167);
 var META = __webpack_require__(309).KEY;
 var $fails = __webpack_require__(54);
@@ -24377,7 +24391,7 @@ setToStringTag(global.JSON, 'JSON', true);
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 var $entries = __webpack_require__(166)(true);
 
 $export($export.S, 'Object', {
@@ -24392,7 +24406,7 @@ $export($export.S, 'Object', {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 var $values = __webpack_require__(166)(false);
 
 $export($export.S, 'Object', {
@@ -24421,7 +24435,7 @@ __webpack_require__(108)('observable');
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(319);
-var global = __webpack_require__(34);
+var global = __webpack_require__(35);
 var hide = __webpack_require__(46);
 var Iterators = __webpack_require__(56);
 var TO_STRING_TAG = __webpack_require__(28)('toStringTag');
@@ -25489,7 +25503,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(35);
+var _inDOM = __webpack_require__(36);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -34343,7 +34357,7 @@ MenuItem.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_dom_helpers_events___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_dom_helpers_events__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_dom_helpers_ownerDocument__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_dom_helpers_ownerDocument___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_dom_helpers_ownerDocument__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_dom_helpers_util_inDOM__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_dom_helpers_util_inDOM__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_dom_helpers_util_inDOM___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_dom_helpers_util_inDOM__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_dom_helpers_util_scrollbarSize__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_dom_helpers_util_scrollbarSize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_dom_helpers_util_scrollbarSize__);
@@ -39761,7 +39775,7 @@ module.exports = FallbackCompositionState;
 
 
 
-var DOMProperty = __webpack_require__(36);
+var DOMProperty = __webpack_require__(37);
 
 var MUST_USE_PROPERTY = DOMProperty.injection.MUST_USE_PROPERTY;
 var HAS_BOOLEAN_VALUE = DOMProperty.injection.HAS_BOOLEAN_VALUE;
@@ -41217,7 +41231,7 @@ var AutoFocusUtils = __webpack_require__(459);
 var CSSPropertyOperations = __webpack_require__(461);
 var DOMLazyTree = __webpack_require__(49);
 var DOMNamespaces = __webpack_require__(127);
-var DOMProperty = __webpack_require__(36);
+var DOMProperty = __webpack_require__(37);
 var DOMPropertyOperations = __webpack_require__(210);
 var EventPluginHub = __webpack_require__(64);
 var EventPluginRegistry = __webpack_require__(84);
@@ -42675,7 +42689,7 @@ module.exports = ReactDOMInput;
 
 
 
-var DOMProperty = __webpack_require__(36);
+var DOMProperty = __webpack_require__(37);
 var ReactComponentTreeHook = __webpack_require__(23);
 
 var warning = __webpack_require__(11);
@@ -43630,7 +43644,7 @@ module.exports = {
 
 
 
-var DOMProperty = __webpack_require__(36);
+var DOMProperty = __webpack_require__(37);
 var EventPluginRegistry = __webpack_require__(84);
 var ReactComponentTreeHook = __webpack_require__(23);
 
@@ -44524,7 +44538,7 @@ module.exports = ReactHostOperationHistoryHook;
 
 
 
-var DOMProperty = __webpack_require__(36);
+var DOMProperty = __webpack_require__(37);
 var EventPluginHub = __webpack_require__(64);
 var EventPluginUtils = __webpack_require__(128);
 var ReactComponentEnvironment = __webpack_require__(131);
@@ -49158,7 +49172,7 @@ var _contains = __webpack_require__(48);
 
 var _contains2 = _interopRequireDefault(_contains);
 
-var _inDOM = __webpack_require__(35);
+var _inDOM = __webpack_require__(36);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
