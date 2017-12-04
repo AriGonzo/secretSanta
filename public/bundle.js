@@ -21960,7 +21960,15 @@ var AddWishModal = function (_React$Component) {
         }, _this.addWish = function () {
             _this.props.addWish(_this.state);
         }, _this.cleanupData = function () {
-            _this.setState({ metadata: false, validUrl: false, url: "", description: "", errorScrape: false });
+            _this.setState({
+                metadata: false,
+                validUrl: false,
+                url: "",
+                description: "",
+                errorScrape: false,
+                metaDescription: "",
+                metaTitle: ""
+            });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 

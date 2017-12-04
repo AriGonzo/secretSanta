@@ -79,7 +79,15 @@ export default class AddWishModal extends React.Component {
     }
 
     cleanupData = () => {
-        this.setState({metadata: false, validUrl: false, url: "", description: "", errorScrape: false})
+        this.setState({
+            metadata: false, 
+            validUrl: false, 
+            url: "", 
+            description: "", 
+            errorScrape: false,
+            metaDescription: "",
+            metaTitle: ""
+        })
     }
 
     render() {
