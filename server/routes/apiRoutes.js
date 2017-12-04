@@ -160,6 +160,7 @@ module.exports = function(app){
 
 	app.post('/addWish', function(req, res){
 		let userId = req.body.userId;
+		
 		let wish = req.body.wish;
 		let FOUR_MINUTES = 240000;
 		let SIX_HOURS = 2.16e+7;

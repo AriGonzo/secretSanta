@@ -22999,6 +22999,10 @@ var NewList = function (_React$Component) {
 				step: step
 			});
 		}, _this.saveAndAdd = function (user, lastAdd) {
+			if (user.name.length == 0) {
+				alert("Please add a name to this person");
+				return false;
+			}
 			var newArray = _this.state.users.slice();
 			newArray.push(user);
 			_this.setState({
@@ -23006,7 +23010,10 @@ var NewList = function (_React$Component) {
 			});
 		}, _this.done = function () {
 			var that = _this;
-			console.log(_this.state.users);
+			if (_this.state.users.length < 1) {
+				alert("Please add at least 2 people to this list");
+				return false;
+			}
 			_api.API.newList({
 				name: _this.state.nameOfList,
 				users: _this.state.users

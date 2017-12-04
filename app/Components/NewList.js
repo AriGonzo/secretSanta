@@ -33,6 +33,10 @@ export default class NewList extends React.Component {
 	}
 
 	saveAndAdd = (user, lastAdd) => {
+		if (user.name.length == 0) {
+			alert("Please add a name to this person")
+			return false
+		}
 		let newArray = this.state.users.slice();
 		newArray.push(user)
 		this.setState({
@@ -42,7 +46,10 @@ export default class NewList extends React.Component {
 
 	done = () => {
 		let that = this;
-		console.log(this.state.users)
+		if (this.state.users.length < 1) {
+			alert("Please add at least 2 people to this list")
+			return false
+		}
 		API.newList({
 			name: this.state.nameOfList,
 			users: this.state.users
