@@ -1,4 +1,4 @@
-#Secret Santa
+# Secret Santa
 
 A project started during Christmas of 2017 to facilitate a Secret Santa drawing between family. 
 
