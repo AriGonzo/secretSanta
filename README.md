@@ -1,6 +1,8 @@
+#Secret Santa
+
 A project started during Christmas of 2017 to facilitate a Secret Santa drawing between family. 
 
-_The problem solved:_ When you do a Secret Santa with family, there are always people you are not going to want to draw because you will be buying them gifts regardless of whether you draw their name or not. This can be parents, romantic partners, mortal enemies, anyone!
+_The problem being solved:_ When you do a Secret Santa with family, there are always people you are not going to want to draw because you will be buying them gifts regardless of whether you draw their name or not. This can be parents, romantic partners, mortal enemies, anyone!
 
 _The Solution!:_ Using this Secret Santa app, you can create your list of people, add their email addresses, and select their "Exceptions". These are people that you want to take out of the drawing for particular users. For example, I would make my wife an exception since I plan on buying her gifts anyway because I don't like sleeping with the dog.
 
