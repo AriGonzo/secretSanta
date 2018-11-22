@@ -163,7 +163,8 @@ button {
 /* Group List */
 
 #groupList {
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .groupListItem, .wishListItem {
