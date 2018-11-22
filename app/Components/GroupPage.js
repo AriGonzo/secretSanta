@@ -37,7 +37,7 @@ export default class GroupPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id="groupList">
                 {this.state.list ? (
                 	<div className="row">
                 		<div className="col-md-4 col-sm-4 col-xs-12">

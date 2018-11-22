@@ -4,6 +4,13 @@ import Button from './Button'
 
 export default class Home extends React.Component {
 
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            style: "plain"
+        }
+    };
+
     render() {
         return (
         	<div className="row homePageButtonWrapper">

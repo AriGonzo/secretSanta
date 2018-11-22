@@ -12451,7 +12451,7 @@ var GroupPage = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { id: 'groupList' },
         this.state.list ? _react2.default.createElement(
           'div',
           { className: 'row' },
@@ -22619,10 +22619,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Home = function (_React$Component) {
     _inherits(Home, _React$Component);
 
-    function Home() {
+    function Home(props, context) {
         _classCallCheck(this, Home);
 
-        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props, context));
+
+        _this.state = {
+            style: "plain"
+        };
+        return _this;
     }
 
     _createClass(Home, [{

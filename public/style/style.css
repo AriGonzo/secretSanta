@@ -162,6 +162,10 @@ button {
 
 /* Group List */
 
+#groupList {
+	overflow: scroll;
+}
+
 .groupListItem, .wishListItem {
 	background-color: #f8f8f8;
 	color: green;
