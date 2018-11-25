@@ -23361,12 +23361,11 @@ var Wishlist = function (_React$Component) {
             });
         }, _this.deleteWish = function (wish) {
             var that = _this;
-            var idx = that.props.activeSelection.wishlist.indexOf(wish);
-            console.log(idx);
-            that.props.activeSelection.wishlist.splice(idx, 1);
+            console.log(wish._id);
             _api.API.deleteWish(wish._id).then(function () {
                 var idx = that.props.activeSelection.wishlist.indexOf(wish);
                 that.props.activeSelection.wishlist.splice(idx, 1);
+                document.getElementsByClassName('groupListItem selected')[0].firstChild.click();
             });
         }, _this.renderWishes = function () {
             var that = _this;
@@ -23403,7 +23402,7 @@ var Wishlist = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'wishlistWrapper' },
+                    { className: 'wishlistWrapper', id: 'wishlistWrapper' },
                     this.props.activeSelection.wishlist.length > 0 ? this.renderWishes() : _react2.default.createElement(_WishlistItem2.default, { hideIcon: 'true', wish: { description: "Your Wishlist is Empty! Add a wish!" } })
                 ),
                 _react2.default.createElement(_AddWishModal2.default, {

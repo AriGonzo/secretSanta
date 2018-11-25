@@ -37,13 +37,12 @@ export default class Wishlist extends React.Component {
 
     deleteWish = (wish) => {
         let that = this;
-        let idx = that.props.activeSelection.wishlist.indexOf(wish);
-        console.log(idx)
-        that.props.activeSelection.wishlist.splice(idx, 1);
+        console.log(wish._id)
         API.deleteWish(wish._id)
             .then(function(){
                 let idx = that.props.activeSelection.wishlist.indexOf(wish);
                 that.props.activeSelection.wishlist.splice(idx, 1);
+                document.getElementsByClassName('groupListItem selected')[0].firstChild.click();
             });
     };
 
@@ -62,7 +61,7 @@ export default class Wishlist extends React.Component {
             			<span className="addWishText hidden-xs"> Add New</span>
         			</span>
     			</h3>
-            	<div className="wishlistWrapper">
+            	<div className="wishlistWrapper" id="wishlistWrapper">
                 {
                     this.props.activeSelection.wishlist.length > 0 ? this.renderWishes() : <WishlistItem hideIcon="true" wish={{description: "Your Wishlist is Empty! Add a wish!"}} />
                         
