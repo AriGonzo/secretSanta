@@ -186,7 +186,7 @@ module.exports = function(app){
 		});
 	});
 
-	app.delete('/deleteWish', function(req, res){
+	app.post('/deleteWish', function(req, res){
 		let wishId = req.body.wishId;
 		Wish.findOneAndRemove(wishId, {}, function(){
 			res.send(200);

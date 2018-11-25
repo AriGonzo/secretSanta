@@ -3200,7 +3200,7 @@ var API = exports.API = {
         return _axios2.default.post('/addWish', { userId: userId, wish: wish });
     },
     deleteWish: function deleteWish(wishId) {
-        return _axios2.default.delete('/deleteWish', { wishId: wishId });
+        return _axios2.default.post('/deleteWish', { wishId: wishId });
     },
     scrapeWebsite: function scrapeWebsite(url) {
         return _axios2.default.post('/scrapeWebsite', { url: url });
