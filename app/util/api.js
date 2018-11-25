@@ -37,6 +37,9 @@ export const API = {
     addWish: function(userId, wish){
         return axios.post('/addWish', {userId, wish});
     },
+    deleteWish: function(wishId){
+        return axios.delete('/deleteWish', {wishId});
+    },
     scrapeWebsite: function(url){
         return axios.post('/scrapeWebsite', {url})
     }

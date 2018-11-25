@@ -186,6 +186,13 @@ module.exports = function(app){
 		});
 	});
 
+	app.delete('/deleteWish', function(req, res){
+		let wishId = req.body.wishId;
+		Wish.findOneAndRemove(wishId, {}, function(){
+			res.send(200);
+		});
+	})
+
 	app.post('/scrapeWebsite', function(req, res){
 		let url = req.body.url;
 		

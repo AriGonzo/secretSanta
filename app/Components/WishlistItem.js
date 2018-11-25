@@ -1,6 +1,27 @@
 import React from 'react';
 
+import DeleteWishModal from './DeleteWishModal';
+
 export default class WishlistItem extends React.Component {
+
+    componentWillMount = () => {
+        this.setState({
+            showWishModal: false,
+            activeSelection: this.props.activeSelection
+        });
+    }
+
+    openDeleteWishModal = () => {
+        this.setState({
+            showDeleteModal: true
+        })
+    }
+
+    closeDeleteWishModal = () => {
+        this.setState({
+            showDeleteModal: false
+        })
+    }
 
     openUrl = () => {
         if (this.props.wish.url) {
@@ -10,8 +31,9 @@ export default class WishlistItem extends React.Component {
 
     render() {
         return (
-            <div className="row amatic wishlistItem" onClick={this.openUrl}>
-            	<div className="col-md-3 col-sm-3 col-xs-3 wishlistItemPicture">
+            <div className="row amatic wishlistItem">
+                <i className={`material-icons deleteWish ${ this.props.hideIcon ? 'hide' : '' }`} onClick={this.openDeleteWishModal}>delete</i>
+            	<div className="col-md-3 col-sm-3 col-xs-3 wishlistItemPicture" onClick={this.openUrl}>
                     <i className={`material-icons ${ this.props.hideIcon ? 'hide' : '' }`}>card_giftcard</i>
                     <br />
                     {
@@ -23,7 +45,7 @@ export default class WishlistItem extends React.Component {
                             ) : ""
                     }
             	</div>
-            	<div className="col-md-9 col-sm-9 col-xs-9 text-left wishlistItemDetails">
+            	<div className="col-md-8 col-sm-8 col-xs-8 text-left wishlistItemDetails" onClick={this.openUrl}>
                     {
                         this.props.wish.description ? <h4>{this.props.wish.description}</h4> : ""
                     }
@@ -36,6 +58,12 @@ export default class WishlistItem extends React.Component {
                             ) : ""
                     }
             	</div>
+                <DeleteWishModal 
+                    showModal={this.state.showDeleteModal}
+                    closeModal={this.closeDeleteWishModal}
+                    wish={this.props.wish} 
+                    deleteWish={this.props.deleteWish}
+                />
             </div>
         );
     }

@@ -3199,6 +3199,9 @@ var API = exports.API = {
     addWish: function addWish(userId, wish) {
         return _axios2.default.post('/addWish', { userId: userId, wish: wish });
     },
+    deleteWish: function deleteWish(wishId) {
+        return _axios2.default.delete('/deleteWish', { wishId: wishId });
+    },
     scrapeWebsite: function scrapeWebsite(url) {
         return _axios2.default.post('/scrapeWebsite', { url: url });
     }
@@ -23352,14 +23355,23 @@ var Wishlist = function (_React$Component) {
             });
         }, _this.addWish = function (wish) {
             var that = _this;
-            console.log(_this.props.activeSelection);
             _api.API.addWish(_this.props.activeSelection._id, wish).then(function (wishAdded) {
                 that.props.activeSelection.wishlist.unshift(wishAdded.data);
                 that.closeModal();
             });
+        }, _this.deleteWish = function (wish) {
+            var that = _this;
+            var idx = that.props.activeSelection.wishlist.indexOf(wish);
+            console.log(idx);
+            that.props.activeSelection.wishlist.splice(idx, 1);
+            _api.API.deleteWish(wish._id).then(function () {
+                var idx = that.props.activeSelection.wishlist.indexOf(wish);
+                that.props.activeSelection.wishlist.splice(idx, 1);
+            });
         }, _this.renderWishes = function () {
+            var that = _this;
             return _this.props.activeSelection.wishlist.map(function (wish, i) {
-                return _react2.default.createElement(_WishlistItem2.default, { key: i, wish: wish });
+                return _react2.default.createElement(_WishlistItem2.default, { key: i, wish: wish, deleteWish: that.deleteWish });
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -23426,6 +23438,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _DeleteWishModal = __webpack_require__(579);
+
+var _DeleteWishModal2 = _interopRequireDefault(_DeleteWishModal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23448,7 +23464,20 @@ var WishlistItem = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WishlistItem.__proto__ || Object.getPrototypeOf(WishlistItem)).call.apply(_ref, [this].concat(args))), _this), _this.openUrl = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WishlistItem.__proto__ || Object.getPrototypeOf(WishlistItem)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
+            _this.setState({
+                showWishModal: false,
+                activeSelection: _this.props.activeSelection
+            });
+        }, _this.openDeleteWishModal = function () {
+            _this.setState({
+                showDeleteModal: true
+            });
+        }, _this.closeDeleteWishModal = function () {
+            _this.setState({
+                showDeleteModal: false
+            });
+        }, _this.openUrl = function () {
             if (_this.props.wish.url) {
                 window.open(_this.props.wish.url, "_blank");
             }
@@ -23456,58 +23485,69 @@ var WishlistItem = function (_React$Component) {
     }
 
     _createClass(WishlistItem, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                "div",
-                { className: "row amatic wishlistItem", onClick: this.openUrl },
+                'div',
+                { className: 'row amatic wishlistItem' },
                 _react2.default.createElement(
-                    "div",
-                    { className: "col-md-3 col-sm-3 col-xs-3 wishlistItemPicture" },
+                    'i',
+                    { className: 'material-icons deleteWish ' + (this.props.hideIcon ? 'hide' : ''), onClick: this.openDeleteWishModal },
+                    'delete'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-3 col-sm-3 col-xs-3 wishlistItemPicture', onClick: this.openUrl },
                     _react2.default.createElement(
-                        "i",
-                        { className: "material-icons " + (this.props.hideIcon ? 'hide' : '') },
-                        "card_giftcard"
+                        'i',
+                        { className: 'material-icons ' + (this.props.hideIcon ? 'hide' : '') },
+                        'card_giftcard'
                     ),
-                    _react2.default.createElement("br", null),
+                    _react2.default.createElement('br', null),
                     this.props.wish.url ? _react2.default.createElement(
-                        "div",
-                        { className: "iconWrapper" },
+                        'div',
+                        { className: 'iconWrapper' },
                         _react2.default.createElement(
-                            "i",
-                            { className: "material-icons" },
-                            "link"
+                            'i',
+                            { className: 'material-icons' },
+                            'link'
                         ),
                         _react2.default.createElement(
-                            "p",
+                            'p',
                             null,
-                            "link"
+                            'link'
                         )
                     ) : ""
                 ),
                 _react2.default.createElement(
-                    "div",
-                    { className: "col-md-9 col-sm-9 col-xs-9 text-left wishlistItemDetails" },
+                    'div',
+                    { className: 'col-md-8 col-sm-8 col-xs-8 text-left wishlistItemDetails', onClick: this.openUrl },
                     this.props.wish.description ? _react2.default.createElement(
-                        "h4",
+                        'h4',
                         null,
                         this.props.wish.description
                     ) : "",
                     this.props.wish.metaTitle ? _react2.default.createElement(
-                        "div",
-                        { className: "metaDataPreview" },
+                        'div',
+                        { className: 'metaDataPreview' },
                         _react2.default.createElement(
-                            "h5",
+                            'h5',
                             null,
                             this.props.wish.metaTitle
                         ),
                         _react2.default.createElement(
-                            "p",
+                            'p',
                             null,
                             this.props.wish.metaDescription
                         )
                     ) : ""
-                )
+                ),
+                _react2.default.createElement(_DeleteWishModal2.default, {
+                    showModal: this.state.showDeleteModal,
+                    closeModal: this.closeDeleteWishModal,
+                    wish: this.props.wish,
+                    deleteWish: this.props.deleteWish
+                })
             );
         }
     }]);
@@ -53691,6 +53731,112 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 579 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactBootstrap = __webpack_require__(125);
+
+var _reactTextLoop = __webpack_require__(239);
+
+var _reactTextLoop2 = _interopRequireDefault(_reactTextLoop);
+
+var _api = __webpack_require__(33);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DeleteWishModal = function (_React$Component) {
+    _inherits(DeleteWishModal, _React$Component);
+
+    function DeleteWishModal() {
+        _classCallCheck(this, DeleteWishModal);
+
+        return _possibleConstructorReturn(this, (DeleteWishModal.__proto__ || Object.getPrototypeOf(DeleteWishModal)).apply(this, arguments));
+    }
+
+    _createClass(DeleteWishModal, [{
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                _reactBootstrap.Modal,
+                { show: this.props.showModal },
+                _react2.default.createElement(
+                    _reactBootstrap.Modal.Header,
+                    null,
+                    _react2.default.createElement(
+                        _reactBootstrap.Modal.Title,
+                        { bsClass: 'amatic largerText' },
+                        'Delete Wish'
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactBootstrap.Modal.Body,
+                    null,
+                    _react2.default.createElement(
+                        'h3',
+                        null,
+                        'Are You Sure you want to remove this wish?'
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactBootstrap.Modal.Footer,
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'text-center' },
+                        _react2.default.createElement(
+                            _reactBootstrap.Button,
+                            {
+                                bsStyle: 'danger',
+                                bsSize: 'large',
+                                onClick: this.props.closeModal
+                            },
+                            'Cancel'
+                        ),
+                        _react2.default.createElement(
+                            _reactBootstrap.Button,
+                            {
+                                bsStyle: 'danger',
+                                bsSize: 'large',
+                                onClick: function onClick() {
+                                    _this2.props.deleteWish(_this2.props.wish);
+                                    _this2.props.closeModal();
+                                }
+                            },
+                            'Done'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return DeleteWishModal;
+}(_react2.default.Component);
+
+exports.default = DeleteWishModal;
 
 /***/ })
 /******/ ]);

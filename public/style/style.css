@@ -243,6 +243,13 @@ button {
 
 .wishlistItem {
 	margin: 0;
+	position: relative;
+}
+
+.wishlistItem .deleteWish {
+	position: absolute;
+    right: 20px;
+    top: 20px;
 }
 
 .wishlistItem .wishlistItemPicture i {
@@ -260,6 +267,7 @@ button {
 .wishlistItem h4 {
 	margin: 0;
 	font-size: 20px;
+	padding-right: 50px;
 }
 
 .wishlistItem > div {

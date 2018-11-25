@@ -28,7 +28,6 @@ export default class Wishlist extends React.Component {
 
     addWish = (wish) => {
         let that = this;
-        console.log(this.props.activeSelection)
         API.addWish(this.props.activeSelection._id, wish)
             .then(function(wishAdded){
                 that.props.activeSelection.wishlist.unshift(wishAdded.data)
@@ -36,11 +35,25 @@ export default class Wishlist extends React.Component {
             });
     }
 
+    deleteWish = (wish) => {
+        let that = this;
+        let idx = that.props.activeSelection.wishlist.indexOf(wish);
+        console.log(idx)
+        that.props.activeSelection.wishlist.splice(idx, 1);
+        API.deleteWish(wish._id)
+            .then(function(){
+                let idx = that.props.activeSelection.wishlist.indexOf(wish);
+                that.props.activeSelection.wishlist.splice(idx, 1);
+            });
+    };
+
     renderWishes = () => {
+        let that = this;
         return this.props.activeSelection.wishlist.map(function(wish, i){
-            return <WishlistItem key={i} wish={wish} />
+            return <WishlistItem key={i} wish={wish} deleteWish={that.deleteWish}/>
         });
-    }
+    };
+
     render() {
         return (
             <div className="full-width autoMargin wishlist">
